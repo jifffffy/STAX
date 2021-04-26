@@ -1,0 +1,6 @@
+io/jiffy/stax/plugin/core/CorePlugin.java
+ io.jiffy.stax.plugin.core.CorePlugin
+io/jiffy/stax/plugin/core/factory/FunctionActionFactory.java
+ io.jiffy.stax.plugin.core.factory.FunctionActionFactory
+io/jiffy/stax/plugin/core/action/FunctionAction.java
+ io.jiffy.stax.plugin.core.action.FunctionAction

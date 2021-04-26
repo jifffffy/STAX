@@ -1,0 +1,123 @@
+<!--================= The Function Element ========================= -->
+        <!--
+                                 The function element defines a named task which can be called.
+                                 The name, requires, and scope attribute values are literals.
+                                 If desired, the function can be described using a function-prolog
+                                 element (or the deprecated function-description element) and/or a
+                                 function-epilog element.  Also, if desired, the function element
+                                 can define the arguments that can be passed to the function.
+                                 The function element can also define any number of function-import
+                                 elements if it requires functions from other xml files.  The
+                                 function-import element must specify either the file or directory
+                                 attribute.
+        -->
+        <!ELEMENT function    ((function-prolog | function-description)?,
+                (function-epilog)?,
+                (function-import)*,
+                (function-no-args | function-single-arg | function-list-args | function-map-args)?,
+                (%task;))>
+        <!ATTLIST function
+                name         ID       #REQUIRED
+                requires     IDREFS   #IMPLIED
+                scope        (local | global) "global"
+                >
+
+        <!ELEMENT function-prolog       (#PCDATA)>
+
+        <!ELEMENT function-epilog       (#PCDATA)>
+
+        <!ELEMENT function-description  (#PCDATA)>
+
+        <!ELEMENT function-import       (#PCDATA)>
+        <!ATTLIST function-import
+                file         CDATA    #IMPLIED
+                directory    CDATA    #IMPLIED
+                machine      CDATA    #IMPLIED
+                >
+        <!ELEMENT function-no-args      EMPTY>
+
+        <!ELEMENT function-single-arg   (
+                function-required-arg |
+                function-optional-arg |
+                function-arg-def
+                )>
+
+        <!ELEMENT function-list-args    (
+                (
+                        (
+                                (
+                                        function-required-arg+,
+                                        function-optional-arg*
+                                        )
+                                |
+                                (
+                                        function-required-arg*,
+                                        function-optional-arg+
+                                        )
+                                ),
+                        (function-other-args)?
+                        )
+                |
+                function-arg-def+
+                )>
+
+        <!ELEMENT function-map-args     (
+                (
+                        (
+                                function-required-arg
+                                |
+                                function-optional-arg
+                                )
+                        +,
+                        (
+                                function-other-args+
+                                )
+                        ?
+                        )
+                |
+                function-arg-def+
+                )>
+
+        <!ELEMENT function-required-arg (#PCDATA)>
+        <!ATTLIST function-required-arg
+                name         CDATA    #REQUIRED
+                >
+
+        <!ELEMENT function-optional-arg (#PCDATA)>
+        <!ATTLIST function-optional-arg
+                name         CDATA    #REQUIRED
+                default      CDATA    "None"
+                >
+
+        <!ELEMENT function-other-args   (#PCDATA)>
+        <!ATTLIST function-other-args
+                name         CDATA    #REQUIRED
+                >
+
+        <!ELEMENT function-arg-def      (function-arg-description?,
+                function-arg-private?,
+                function-arg-property*)>
+        <!ATTLIST function-arg-def
+                name         CDATA    #REQUIRED
+                type         (required | optional | other) "required"
+                default      CDATA    "None"
+                >
+
+        <!ELEMENT function-arg-description  (#PCDATA)>
+
+        <!ELEMENT function-arg-private   EMPTY>
+
+        <!ELEMENT function-arg-property  (function-arg-property-description?,
+                function-arg-property-data*)>
+        <!ATTLIST function-arg-property
+                name         CDATA    #REQUIRED
+                value        CDATA    #IMPLIED
+                >
+
+        <!ELEMENT function-arg-property-description  (#PCDATA)>
+
+        <!ELEMENT function-arg-property-data (function-arg-property-data)*>
+        <!ATTLIST function-arg-property-data
+                type         CDATA    #REQUIRED
+                value        CDATA    #IMPLIED
+                >

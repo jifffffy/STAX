@@ -1,0 +1,3 @@
+<!ELEMENT eject-slot-start     (type, cmdData)>
+<!ELEMENT type     (#PCDATA)>
+<!ELEMENT cmdData     (#PCDATA)>

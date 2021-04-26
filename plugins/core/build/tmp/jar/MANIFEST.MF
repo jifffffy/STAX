@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Plugin-Id: core-plugin
+Plugin-Provider: Jiffy
+Plugin-Version: task ':plugins:core:jar' property 'archiveVersion'
+Plugin-Class: io.jiffy.stax.plugin.core.CorePlugin
+
