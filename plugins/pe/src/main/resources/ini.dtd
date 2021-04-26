@@ -1,0 +1,17 @@
+<!ELEMENT ini     (query| update| remove)>
+        <!ATTLIST ini
+                load       CDATA   #IMPLIED
+                >
+        <!ELEMENT query     (section, option)>
+
+        <!ELEMENT update     (section, option)>
+        <!ELEMENT remove     (section, option)>
+
+        <!ELEMENT section     EMPTY>
+        <!ATTLIST section
+                name       CDATA   #IMPLIED
+                >
+        <!ELEMENT option     (#PCDATA)>
+        <!ATTLIST option
+                name       CDATA   #IMPLIED
+                >

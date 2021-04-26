@@ -5,9 +5,10 @@
 /* This software is licensed under the Eclipse Public License (EPL) V1.0.    */
 /*****************************************************************************/
 
-package io.jiffy.stax.plugin.pe;
+package io.jiffy.stax.plugin.pe.action;
 
 import com.ibm.staf.service.stax.*;
+import io.jiffy.stax.plugin.pe.factory.DelayActionFactory;
 
 import java.util.HashMap;
 

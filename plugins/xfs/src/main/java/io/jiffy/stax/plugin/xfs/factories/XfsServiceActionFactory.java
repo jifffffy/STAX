@@ -5,19 +5,7 @@ import io.jiffy.stax.plugin.xfs.actions.XfsServiceAction;
 import org.pmw.tinylog.Logger;
 import org.w3c.dom.Node;
 
-/**
- * STAXAction wrapper element
- * 提供XFS service wrapper,用于内部的XFS command获取Service名称,如：
- * <ptr>
- * <status/>
- * </ptr>
- * statusAction将要执行的命令为: local xfs ptr status
- * machine: local
- * service: xfs
- * request: ptr status
- *
- * @param <T>
- */
+
 public abstract class XfsServiceActionFactory<T extends XfsServiceAction> extends ActionFactorySupport<T> implements STAXJobManagementHandler {
 
     public XfsServiceActionFactory(String name, Class<T> clazz) {
