@@ -1,0 +1,10 @@
+rootProject.name = 'STAX'
+include 'stax'
+include 'plugins'
+include 'plugins:core'
+findProject(':plugins:core')?.name = 'core'
+include 'plugins:xfs'
+findProject(':plugins:xfs')?.name = 'xfs'
+include 'plugins:pe'
+findProject(':plugins:pe')?.name = 'pe'
+

@@ -1,0 +1,106 @@
+@startuml
+package com.ibm.staf.service.stax #DDDDDD{
+    class STAXSTAFCommandActionFactory
+    class STAXSTAFCommandAction
+    class STAXActionDefaultImpl
+
+    interface STAXAction
+    interface STAXSTAFRequestCompleteListener
+    interface STAXActionFactory
+    interface ActionFactoryExtensionPoint
+    interface STAXJobManagementHandler
+    interface ActionFactoryExtensionPoint
+    abstract class ActionFactoryExtensionPointAdapter
+    abstract class ActionFactorySupport<? extends STAXActionDefaultImpl>
+
+    STAXActionFactory <|-- ActionFactoryExtensionPoint
+    ActionFactoryExtensionPoint <|.. ActionFactoryExtensionPointAdapter
+    STAXActionFactory <|.. STAXSTAFCommandActionFactory
+    STAXSTAFCommandActionFactory .|> STAXJobManagementHandler
+
+    STAXAction <- STAXActionFactory
+    STAXAction <|-- STAXActionDefaultImpl
+    STAXActionDefaultImpl <|-- STAXSTAFCommandActionFactory
+    STAXSTAFCommandActionFactory --> STAXSTAFCommandAction
+}
+
+
+
+package io.jiffy.stax.plugin.xfs {
+    package factories {
+      abstract class XfsServiceActionFactory<? extends XfsServiceAction>
+      abstract class XfsCommandActionFactory<? extends XfsCommandAction>
+      abstract class XfsExecuteCommandActionFactory<? extends XfsExecuteCommandAction>
+
+      class RptActionFactory
+      class StatusActionFactory
+
+      class ResetActionFactory
+      class PrintFormActionFactory
+      class RawDataActionFactory
+
+      ActionFactorySupport <|-- XfsServiceActionFactory
+      ActionFactorySupport <|-- XfsCommandActionFactory
+      XfsCommandActionFactory <|-- XfsExecuteCommandActionFactory
+      XfsCommandActionFactory <|-- StatusActionFactory
+      XfsExecuteCommandActionFactory <|-- ResetActionFactory
+      XfsExecuteCommandActionFactory <|-- PrintFormActionFactory
+      XfsExecuteCommandActionFactory <|-- RawDataActionFactory
+    }
+
+    package actions {
+      class XfsServiceAction
+      abstract class XfsCommandAction
+      abstract class XfsExecuteCommandAction
+      abstract class XfsExecuteCommandSingleParamAction
+      abstract class XfsExecuteCommandMapParamAction
+      abstract class XfsExecuteCommandListParamAction
+      class ResetAction
+      class PrintFormAction
+      class RawDataAction
+      class StatusAction
+
+      class RptAction
+      class AccAction
+      class BcrAction
+      class CcuAction
+      class EppAction
+
+      XfsServiceAction <|-- RptAction
+      XfsServiceAction <|-- AccAction
+      XfsServiceAction <|-- BcrAction
+      XfsServiceAction <|-- CcuAction
+      XfsServiceAction <|-- EppAction
+      XfsCommandAction <|-- StatusAction
+      XfsCommandAction <|-- XfsExecuteCommandAction
+      XfsExecuteCommandAction <|-- XfsExecuteCommandMapParamAction
+      XfsExecuteCommandAction <|-- XfsExecuteCommandSingleParamAction
+      XfsExecuteCommandAction <|-- XfsExecuteCommandListParamAction
+      XfsExecuteCommandMapParamAction <|-- ResetAction
+      XfsExecuteCommandMapParamAction <|-- RawDataAction
+      XfsExecuteCommandMapParamAction <|-- PrintFormAction
+    }
+
+    package service {
+        class RptActionFactory
+        class AccActionFactory
+        class BcrActionFactory
+        class CcuActionFactory
+        class EppActionFactory
+
+        XfsServiceActionFactory <|-- RptActionFactory
+        XfsServiceActionFactory <|-- AccActionFactory
+        XfsServiceActionFactory <|-- BcrActionFactory
+        XfsServiceActionFactory <|-- CcuActionFactory
+        XfsServiceActionFactory <|-- EppActionFactory
+    }
+
+
+
+}
+
+ActionFactoryExtensionPointAdapter <|-- ActionFactorySupport
+STAXJobManagementHandler <|.. XfsServiceActionFactory
+STAXSTAFCommandAction <|-- XfsCommandAction
+STAXActionDefaultImpl <|-- XfsServiceAction
+@enduml
