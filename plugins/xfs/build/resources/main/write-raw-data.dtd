@@ -1,1 +1,1 @@
-<!ELEMENT dispense     (#PCDATA)>
+<!ELEMENT write-raw-data     (#PCDATA)>

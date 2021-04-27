@@ -61,8 +61,7 @@ public class STAXSignalHandlerAction extends STAXActionDefaultImpl
             return;
         }
 
-        STAXSignalExecutionAction action = new STAXSignalExecutionAction(
-            fName, fAction);
+        STAXSignalExecutionAction action = new STAXSignalExecutionAction(fName, fAction);
         action.setElement(getElement());
         action.setLineNumberMap(getLineNumberMap());
         action.setXmlFile(getXmlFile());

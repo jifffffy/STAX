@@ -22,7 +22,7 @@ public abstract class ActionFactorySupport<T extends STAXActionDefaultImpl> exte
         staxAction.setXmlFile(job.getXmlFile());
         staxAction.setXmlMachine(job.getXmlMachine());
 
-        handleActionAttributes(staxService, job, staxAction, root.getAttributes());
+        handleRootAttributes(staxService, job, staxAction, root, root.getAttributes());
         NodeList children = root.getChildNodes();
 
         for (int i = 0; i < children.getLength(); ++i) {
@@ -67,7 +67,7 @@ public abstract class ActionFactorySupport<T extends STAXActionDefaultImpl> exte
         }
     }
 
-    protected void handleActionAttributes(STAX staxService, STAXJob job, T action, NamedNodeMap attrs) {
+    protected void handleRootAttributes(STAX staxService, STAXJob job, T action, Node root, NamedNodeMap attrs) throws STAXException {
     }
 
     protected void handleCommentNode(STAX staxService, STAXJob job, T action, Node root, Node child) {

@@ -1655,7 +1655,7 @@ public class STAX implements STAFServiceInterfaceLevel30, STAXJobCompleteListene
             for (ActionFactoryExtensionPoint actionFactoryExtensionPoint : actionFactoryExtensionPoints) {
                 actionFactoryExtensionPoint.loadResource(plugin);
                 actionFactoryExtensionPoint.initialize(this);
-                Logger.info("---> {}", actionFactoryExtensionPoint.getDTDTaskName());
+                // Logger.info("---> {}", actionFactoryExtensionPoint.getDTDTaskName());
                 fActionFactoryMap.put(actionFactoryExtensionPoint.getDTDTaskName(), actionFactoryExtensionPoint);
             }
         }

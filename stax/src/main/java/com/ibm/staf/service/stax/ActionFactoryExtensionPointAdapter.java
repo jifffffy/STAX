@@ -3,6 +3,7 @@ package com.ibm.staf.service.stax;
 import org.apache.commons.io.IOUtils;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
+import org.pmw.tinylog.Logger;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -25,6 +26,7 @@ public abstract class ActionFactoryExtensionPointAdapter implements ActionFactor
 
     @Override
     public void loadResource(PluginWrapper pluginWrapper) throws IOException {
+        Logger.info("load {}.dtd", name);
         dtdInfo = IOUtils.toString(Objects.requireNonNull(pluginWrapper.getPluginClassLoader().getResourceAsStream(name + ".dtd")), StandardCharsets.UTF_8.name());
     }
 

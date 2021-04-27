@@ -7,7 +7,7 @@ Response
 
    STAX Extension Elements: []
 
-   Generated Date: 20210426-09:55:15
+   Generated Date: 20210427-15:37:27
 
    This DTD module is identified by the SYSTEM identifier:
 
@@ -19,22 +19,42 @@ Response
 
 <!ENTITY % stax-elems 'function | script | signalhandler'>
 
-<!ENTITY % task       'acc | control-media | release | 
-                       hold | dis | raw-data | 
-                       loop | continue | raise | 
+<!ENTITY % task       'control-media | beep | card-unit-info | 
+                       fig | release | export-rsa-issuer-signed-item | 
+                       set-guid-light | raw-data | ccu | 
                        block | if | form-list | 
-                       signalhandler | script | sequence | 
-                       call-with-map | delay | try | 
-                       terminate | job | media-list | 
-                       status | read-form | import | 
-                       log | nop | bcr | 
-                       stafcmd | timer | parallel | 
-                       paralleliterate | iterate | on | 
+                       cash-unit-info | signalhandler | eject-slot-start | 
+                       epp | retain-slot-end | cash-in-start | 
+                       retain-card | script | call-with-map | 
+                       delay | ukey-isr | doc | 
+                       terminate | reset-count | card-isr | 
+                       media-list | start-exchange | status | 
+                       read-form | log | eject-card | 
+                       configure-note-types | cash-in-end | digitalio | 
+                       bcr | initialization | set-cash-unit-info | 
+                       iterate | print-form | break | 
+                       read-input | rtn | testcase | 
+                       breakpoint | call | write-raw-data | 
+                       throw | retract | cash-in-rollback | 
+                       end-exchange | return | open | 
+                       acc | import-rsa-public-key | retain-slot-start | 
+                       action-keys | read-raw-data | hold | 
+                       dis | loop | continue | 
+                       raise | dispense-card | mcr | 
+                       enable-events | cash-in-status | mcr-idc | 
+                       dispense | trd | jnl | 
+                       import-key | sequence | set-card-unit-info | 
+                       idr | currency-exp | try | 
+                       job | fdk-keys | psb | 
+                       retain-slot-start-ex | import | crypt | 
+                       nop | stafcmd | timer | 
+                       parallel | hcr | paralleliterate | 
+                       note-type-list | read-image | on | 
                        rethrow | process | capabilities | 
-                       print-form | break | message | 
-                       testcase | breakpoint | call | 
-                       call-with-list | throw | rpt | 
-                       tcstatus | return | open'>
+                       ini | isr-idc | message | 
+                       cash-in | call-with-list | rpt | 
+                       slots-info | open-shutter | close-shutter | 
+                       tcstatus'>
 
 <!--================= STAX Job Definition ========================== -->
 <!--
@@ -55,7 +75,12 @@ Response
 <!ATTLIST defaultcall
           function     IDREF    #REQUIRED
 >
-<!ELEMENT acc     (%task;)><!ELEMENT control-media     (#PCDATA)>
+<!ELEMENT control-media     (#PCDATA)><!ELEMENT beep     EMPTY>
+<!ATTLIST beep
+        hz       CDATA   #IMPLIED
+        msecs       CDATA   #IMPLIED
+        vol       CDATA   #IMPLIED
+        ><!ELEMENT card-unit-info     EMPTY><!ELEMENT fig     (%task;)>
 <!--================= The Release Element ========================== -->
 <!--
      The release element specifies to release a block in the job.
@@ -67,7 +92,188 @@ Response
           block      CDATA    #IMPLIED
           if         CDATA    "1"
 >
+<!ELEMENT export-rsa-issuer-signed-item     (#PCDATA)><!ELEMENT set-guid-light     (#PCDATA)><!ELEMENT raw-data     (#PCDATA)><!ELEMENT ccu     (%task;)>
+<!--================= The Block Element ============================ -->
+<!--
+     Defines a task block that can be held, released, or terminated.
+     Used in conjunction with the hold/terminate/release elements to
+     define a task block that can be held, terminated, or released.
+     The name attribute value is evaluated via Python.
+-->
+<!ELEMENT block      (%task;)>
+<!ATTLIST block
+          name       CDATA    #REQUIRED
+>
 
+<!--================= The Conditional Element (if-then-else) ======= -->
+<!--
+     Allows you to write an if or a case construct with zero or more
+     elseifs and one or no else statements.
+
+     The expr attribute value is evaluated via Python and must evaluate
+     to a boolean value.
+-->
+<!ELEMENT if         ((%task;), elseif*, else?)>
+<!ATTLIST if
+          expr       CDATA   #REQUIRED
+>
+<!ELEMENT elseif     (%task;)>
+<!ATTLIST elseif
+          expr       CDATA   #REQUIRED
+>
+<!ELEMENT else       (%task;)>
+<!ELEMENT form-list     EMPTY><!ELEMENT cash-unit-info     EMPTY>
+<!--================= The Signal Handler Element =================== -->
+<!--
+     The signalhandler element defines how to handle a specified signal.
+     The signal attribute value is evaluated via Python.
+-->
+<!ELEMENT signalhandler (%task;)>
+<!ATTLIST signalhandler
+          signal     CDATA        #REQUIRED
+>
+<!ELEMENT eject-slot-start     (type, cmdData)>
+<!ELEMENT type     (#PCDATA)>
+<!ELEMENT cmdData     (#PCDATA)><!ELEMENT epp     (%task;)><!ELEMENT retain-slot-end     (#PCDATA)><!ELEMENT cash-in-start     (#PCDATA)><!ELEMENT retain-card     (#PCDATA)>
+<!--================= The Script Element =========================== -->
+<!--
+     Specifies Python code to be executed.
+-->
+<!ELEMENT script     (#PCDATA)>
+
+<!--================= The Call-With-Map Element ==================== -->
+<!--
+     Perform a function with the referenced name with any number of
+     arguments in the form of a map of named arguments.  The function
+     and name attribute values as well as the argument value are
+     evaluated via Python.
+-->
+<!ELEMENT call-with-map       (call-map-arg*)>
+<!ATTLIST call-with-map
+          function   CDATA    #REQUIRED
+>
+
+<!ELEMENT call-map-arg        (#PCDATA)>
+<!ATTLIST call-map-arg
+          name       CDATA    #REQUIRED
+>
+<!ELEMENT delay     (#PCDATA)><!ELEMENT ukey-isr     (%task;)><!ELEMENT doc     (%task;)>
+<!--================= The Terminate Element ======================== -->
+<!--
+     The terminate element specifies to terminate a block in the job.
+     If an if attribute is specified and it evaluates via Python to
+     false, the terminate element is ignored.
+-->
+<!ELEMENT terminate  EMPTY>
+<!ATTLIST terminate
+          block      CDATA    #IMPLIED
+          if         CDATA    "1"
+>
+<!ELEMENT reset-count     EMPTY><!ELEMENT card-isr     (%task;)><!ELEMENT mdeia-list     EMPTY><!ELEMENT start-exchange     (#PCDATA)><!ELEMENT status     EMPTY><!ELEMENT read-form     (#PCDATA)>
+<!--================= The Log Element ============================== -->
+<!--
+     Writes a message and its log level to a STAX Job User Log file.
+     The message must evaluate via Python to a string.
+
+     The log level specified defaults to 'info'.  If specified, it
+     must evaluate via Python to a string containing one of the
+     following STAF Log Service Log levels:
+       fatal, warning, info, trace, trace2, trace3, debug, debug2,
+       debug3, start, stop, pass, fail, status, user1, user2, user3,
+       user4, user5, user6, user7, user8
+     The message attribute is evaluated via Python.  If it evaluates
+     to true, the message text will also be sent to the STAX Job Monitor.
+     The message attribute defaults to the STAXMessageLog variable whose
+     value defaults to 0 (false) but can by changed within the STAX job
+     to turn on messaging.
+
+     If an if attribute is specified and it evaluates via Python to
+     false, then the log element is ignored.
+-->
+<!ELEMENT log         (#PCDATA)>
+<!ATTLIST log
+          level       CDATA       "'info'"
+          message     CDATA       "STAXMessageLog"
+          if          CDATA       "1"
+>
+<!ELEMENT eject-card     (#PCDATA)><!ELEMENT configure-note-types     (#PCDATA)><!ELEMENT cash-in-end     EMPTY><!ELEMENT digitalio     (%task;)><!ELEMENT bcr     (%task;)><!ELEMENT initialization     EMPTY><!ELEMENT set-cash-unit-info     (#PCDATA)>
+<!--================= The Iterate Element ========================= -->
+<!--
+     The iterate element iterates through a list of items, performing
+     its contained task while substituting each item in the list.
+     The iterated tasks are performed in sequence.
+-->
+<!ELEMENT iterate  (%task;)>
+<!-- var      is the name of the variable which will contain the
+              current item in the list or tuple being iterated.
+              It is a literal.
+     in       is the list or tuple to be iterated.  It is evaluated
+              via Python and must evaluate to be a list or tuple.
+     indexvar is the name of a variable which will contain the index of
+              the current item in the list or tuple being iterated.
+              It is a literal.  The value for the first index is 0.
+-->
+<!ATTLIST iterate
+          var        CDATA    #REQUIRED
+          in         CDATA    #REQUIRED
+          indexvar   CDATA    #IMPLIED
+>
+<!ELEMENT print-form     (#PCDATA)>
+<!--================= Break Element ================================ -->
+<!--
+     The break element can be used to break out of a loop or iterate
+     element.
+-->
+<!ELEMENT break      EMPTY>
+<!ELEMENT read-input     (#PCDATA)><!ELEMENT rtn     (%task;)>
+<!--================= The Testcase Element ========================= -->
+<!--
+     Defines a testcase.  Used in conjunction with the tcstatus
+     element to mark the status for a testcase.
+     The name attribute value is evaluated via Python.
+-->
+<!ELEMENT testcase   (%task;)>
+<!ATTLIST testcase
+          name       CDATA    #REQUIRED
+          mode       CDATA    "'default'"
+>
+
+<!--================= The Breakpoint Element ============================ -->
+<!--
+     The breakpoint element allows you to denote a breakpoint.
+-->
+<!ELEMENT breakpoint     EMPTY>
+
+<!--================= The Call Element ============================= -->
+<!--
+     Perform a function with the referenced name.
+     The function attribute value is evaluated via Python.
+     Arguments can be specified as data to the call element.
+     Arguments are evaluated via Python.
+-->
+<!ELEMENT call       (#PCDATA)>
+<!ATTLIST call
+          function   CDATA    #REQUIRED
+>
+
+<!ELEMENT write-raw-data     (#PCDATA)>
+<!--================= The Throw Element ============================ -->
+<!--
+     The throw element specifies an exception to throw.
+     The exception attribute value and any additional information
+     is evaluated via Python.
+-->
+<!ELEMENT throw      (#PCDATA)>
+<!ATTLIST throw
+          exception  CDATA        #REQUIRED
+>
+<!ELEMENT retract     (#PCDATA)><!ELEMENT cash-in-rollback     EMPTY><!ELEMENT end-exchange     (#PCDATA)>
+<!--================= The Return Element =========================== -->
+<!--
+     Specifies a value to return from a function.
+-->
+<!ELEMENT return     (#PCDATA)>
+<!ELEMENT open     (#PCDATA)><!ELEMENT acc     (%task;)><!ELEMENT import-rsa-public-key     (#PCDATA)><!ELEMENT retain-slot-start     EMPTY><!ELEMENT action-keys     (#PCDATA)><!ELEMENT read-raw-data     (#PCDATA)>
 <!--================= The Hold Element ============================= -->
 <!--
      The hold element specifies to hold a block in the job.
@@ -91,7 +297,7 @@ Response
           if         CDATA    "1"
           timeout    CDATA    "0"
 >
-<!ELEMENT dis     (%task;)><!ELEMENT raw-data     (#PCDATA)>
+<!ELEMENT dis     (%task;)>
 <!--================= The Loop Element ============================= -->
 <!--
      The loop element performs a task a specified number of times,
@@ -241,83 +447,13 @@ Response
 <!ATTLIST raise
           signal     CDATA        #REQUIRED
 >
-
-<!--================= The Block Element ============================ -->
-<!--
-     Defines a task block that can be held, released, or terminated.
-     Used in conjunction with the hold/terminate/release elements to
-     define a task block that can be held, terminated, or released.
-     The name attribute value is evaluated via Python.
--->
-<!ELEMENT block      (%task;)>
-<!ATTLIST block
-          name       CDATA    #REQUIRED
->
-
-<!--================= The Conditional Element (if-then-else) ======= -->
-<!--
-     Allows you to write an if or a case construct with zero or more
-     elseifs and one or no else statements.
-
-     The expr attribute value is evaluated via Python and must evaluate
-     to a boolean value.
--->
-<!ELEMENT if         ((%task;), elseif*, else?)>
-<!ATTLIST if
-          expr       CDATA   #REQUIRED
->
-<!ELEMENT elseif     (%task;)>
-<!ATTLIST elseif
-          expr       CDATA   #REQUIRED
->
-<!ELEMENT else       (%task;)>
-<!--
-     Get a form list.
--->
-<!ELEMENT form-list     EMPTY>
-<!--================= The Signal Handler Element =================== -->
-<!--
-     The signalhandler element defines how to handle a specified signal.
-     The signal attribute value is evaluated via Python.
--->
-<!ELEMENT signalhandler (%task;)>
-<!ATTLIST signalhandler
-          signal     CDATA        #REQUIRED
->
-
-<!--================= The Script Element =========================== -->
-<!--
-     Specifies Python code to be executed.
--->
-<!ELEMENT script     (#PCDATA)>
-
+<!ELEMENT dispense-card     (#PCDATA)><!ELEMENT mcr     (%task;)><!ELEMENT enable-events     EMPTY><!ELEMENT cash-in-status     EMPTY><!ELEMENT mcr-idc     (%task;)><!ELEMENT dispense     (#PCDATA)><!ELEMENT trd     (%task;)><!ELEMENT jnl     (%task;)><!ELEMENT import-key     (#PCDATA)>
 <!--================= The Sequence Element ========================= -->
 <!--
      The sequence element performs one or more tasks in sequence.
 -->
 <!ELEMENT sequence   (%task;)+>
-
-<!--================= The Call-With-Map Element ==================== -->
-<!--
-     Perform a function with the referenced name with any number of
-     arguments in the form of a map of named arguments.  The function
-     and name attribute values as well as the argument value are
-     evaluated via Python.
--->
-<!ELEMENT call-with-map       (call-map-arg*)>
-<!ATTLIST call-with-map
-          function   CDATA    #REQUIRED
->
-
-<!ELEMENT call-map-arg        (#PCDATA)>
-<!ATTLIST call-map-arg
-          name       CDATA    #REQUIRED
->
-<!--================= The Ext-Delay Element ============================ -->
-<!--
-    Delays for the specified number of seconds and generates and event every iteration.
--->
-<!ELEMENT delay     (#PCDATA)>
+<!ELEMENT set-card-unit-info     (#PCDATA)><!ELEMENT idr     (%task;)><!ELEMENT currency-exp     EMPTY>
 <!--=============== The Try / Catch / Finally Elements ============= --> 
 <!-- 
      The try element allows you to perform a task and to catch 
@@ -344,18 +480,6 @@ Response
           sourcevar  CDATA        #IMPLIED 
 > 
 <!ELEMENT finally    (%task;)> 
-
-<!--================= The Terminate Element ======================== -->
-<!--
-     The terminate element specifies to terminate a block in the job.
-     If an if attribute is specified and it evaluates via Python to
-     false, the terminate element is ignored.
--->
-<!ELEMENT terminate  EMPTY>
-<!ATTLIST terminate
-          block      CDATA    #IMPLIED
-          if         CDATA    "1"
->
 
 <!--================== The STAX Job Element ===================== -->
 <!--
@@ -598,10 +722,7 @@ Response
 <!ATTLIST job-action
           if        CDATA    "1"
 >
-<!ELEMENT mdeia-list     EMPTY><!--
-     Get a status.
--->
-<!ELEMENT status     EMPTY><!ELEMENT read-form     (#PCDATA)>
+<!ELEMENT fdk-keys     (#PCDATA)><!ELEMENT psb     (%task;)><!ELEMENT retain-slot-start-ex     (#PCDATA)>
 <!--================= The Import Element =========================== -->
 <!--
      Allows importing of functions from other STAX XML job file(s).
@@ -619,40 +740,13 @@ Response
 <!ELEMENT import-include (#PCDATA)>
 <!ELEMENT import-exclude (#PCDATA)>
 
-
-<!--================= The Log Element ============================== -->
-<!--
-     Writes a message and its log level to a STAX Job User Log file.
-     The message must evaluate via Python to a string.
-
-     The log level specified defaults to 'info'.  If specified, it
-     must evaluate via Python to a string containing one of the
-     following STAF Log Service Log levels:
-       fatal, warning, info, trace, trace2, trace3, debug, debug2,
-       debug3, start, stop, pass, fail, status, user1, user2, user3,
-       user4, user5, user6, user7, user8
-     The message attribute is evaluated via Python.  If it evaluates
-     to true, the message text will also be sent to the STAX Job Monitor.
-     The message attribute defaults to the STAXMessageLog variable whose
-     value defaults to 0 (false) but can by changed within the STAX job
-     to turn on messaging.
-
-     If an if attribute is specified and it evaluates via Python to
-     false, then the log element is ignored.
--->
-<!ELEMENT log         (#PCDATA)>
-<!ATTLIST log
-          level       CDATA       "'info'"
-          message     CDATA       "STAXMessageLog"
-          if          CDATA       "1"
->
-
+<!ELEMENT crypt     (#PCDATA)>
 <!--================= The No Operation Element ===================== -->
 <!--
      No operation action.
 -->
 <!ELEMENT nop        EMPTY>
-<!ELEMENT bcr     (%task;)>
+
 <!--================= The STAF Command Element ===================== -->
 <!--
      Specifies a STAF command to be executed.
@@ -695,7 +789,7 @@ Response
      The parallel element performs one or more tasks in parallel.
 -->
 <!ELEMENT parallel   (%task;)+>
-
+<!ELEMENT hcr     (%task;)>
 <!--================= The Parallel Iterate Element ================ -->
 <!--
      The parallel iterate element iterates through a list of items,
@@ -722,29 +816,7 @@ Response
           indexvar   CDATA    #IMPLIED
           maxthreads CDATA    "0"
 >
-
-<!--================= The Iterate Element ========================= -->
-<!--
-     The iterate element iterates through a list of items, performing
-     its contained task while substituting each item in the list.
-     The iterated tasks are performed in sequence.
--->
-<!ELEMENT iterate  (%task;)>
-<!-- var      is the name of the variable which will contain the
-              current item in the list or tuple being iterated.
-              It is a literal.
-     in       is the list or tuple to be iterated.  It is evaluated
-              via Python and must evaluate to be a list or tuple.
-     indexvar is the name of a variable which will contain the index of
-              the current item in the list or tuple being iterated.
-              It is a literal.  The value for the first index is 0.
--->
-<!ATTLIST iterate
-          var        CDATA    #REQUIRED
-          in         CDATA    #REQUIRED
-          indexvar   CDATA    #IMPLIED
->
-<!ELEMENT on     (#PCDATA)>
+<!ELEMENT note-type-list     EMPTY><!ELEMENT read-image     (#PCDATA)><!ELEMENT on     (#PCDATA)>
 <!--================= The Rethrow Element ========================= -->
 <!--
      The rethrow element specifies to rethrow the current exception.
@@ -1143,17 +1215,32 @@ Response
 <!ATTLIST other
           if        CDATA     "1"
 >
-<!--
-     Get capabilities.
+<!ELEMENT capabilities     EMPTY><!--
+<ini load="file/path">
+  <query>
+    <section name="xxx">
+      <option name="yyy"></option>
+    </section>
+  </query>
+</ini>
 -->
-<!ELEMENT capabilities     EMPTY><!ELEMENT print-form     (#PCDATA)>
-<!--================= Break Element ================================ -->
-<!--
-     The break element can be used to break out of a loop or iterate
-     element.
--->
-<!ELEMENT break      EMPTY>
-
+<!ELEMENT ini     (query| update| remove)>
+        <!ATTLIST ini
+                path       CDATA   #IMPLIED
+                >
+        <!ELEMENT query     (section)>
+
+        <!ELEMENT update     (section)>
+        <!ELEMENT remove     (section)>
+
+        <!ELEMENT section     (option)>
+        <!ATTLIST section
+                name       CDATA   #IMPLIED
+                >
+        <!ELEMENT option     (#PCDATA)>
+        <!ATTLIST option
+                name       CDATA   #IMPLIED
+                ><!ELEMENT isr-idc     (%task;)>
 <!--================= The Message Element ========================== -->
 <!--
      Generates an event and makes the message value available to the
@@ -1182,38 +1269,7 @@ Response
           level       CDATA       "'info'"
           if          CDATA       "1"
 >
-
-<!--================= The Testcase Element ========================= -->
-<!--
-     Defines a testcase.  Used in conjunction with the tcstatus
-     element to mark the status for a testcase.
-     The name attribute value is evaluated via Python.
--->
-<!ELEMENT testcase   (%task;)>
-<!ATTLIST testcase
-          name       CDATA    #REQUIRED
-          mode       CDATA    "'default'"
->
-
-<!--================= The Breakpoint Element ============================ -->
-<!--
-     The breakpoint element allows you to denote a breakpoint.
--->
-<!ELEMENT breakpoint     EMPTY>
-
-<!--================= The Call Element ============================= -->
-<!--
-     Perform a function with the referenced name.
-     The function attribute value is evaluated via Python.
-     Arguments can be specified as data to the call element.
-     Arguments are evaluated via Python.
--->
-<!ELEMENT call       (#PCDATA)>
-<!ATTLIST call
-          function   CDATA    #REQUIRED
->
-
-
+<!ELEMENT cash-in     EMPTY>
 <!--================= The Call-With-List Element =================== -->
 <!--
      Perform a function with the referenced name with any number of
@@ -1227,18 +1283,7 @@ Response
 
 <!ELEMENT call-list-arg       (#PCDATA)>
 
-
-<!--================= The Throw Element ============================ -->
-<!--
-     The throw element specifies an exception to throw.
-     The exception attribute value and any additional information
-     is evaluated via Python.
--->
-<!ELEMENT throw      (#PCDATA)>
-<!ATTLIST throw
-          exception  CDATA        #REQUIRED
->
-<!ELEMENT rpt     (%task;)>
+<!ELEMENT rpt     (%task;)><!ELEMENT solts-info     EMPTY><!ELEMENT open-shutter     (#PCDATA)><!ELEMENT close-shutter     (#PCDATA)>
 <!--================= The Testcase Status Element ================== -->
 <!--
      Marks status result ('pass' or 'fail' or 'info') for a testcase
@@ -1250,12 +1295,3 @@ Response
           result     CDATA  #REQUIRED
 >
 
-<!--================= The Return Element =========================== -->
-<!--
-     Specifies a value to return from a function.
--->
-<!ELEMENT return     (#PCDATA)>
-<!--
-     Specifies a logicalName value to open.
--->
-<!ELEMENT open     (#PCDATA)>

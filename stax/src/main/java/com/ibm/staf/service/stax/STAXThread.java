@@ -1096,8 +1096,7 @@ public class STAXThread implements STAXThreadCompleteListener {
     // Signal functions
     //
 
-    public void registerSignalHandler(String name,
-                                      STAXSignalExecutionAction signalHandler) {
+    public void registerSignalHandler(String name, STAXSignalExecutionAction signalHandler) {
         fSignalHandlerMap.put(name, signalHandler);
     }
 

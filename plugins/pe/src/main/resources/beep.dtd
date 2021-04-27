@@ -1,0 +1,6 @@
+<!ELEMENT beep     EMPTY>
+<!ATTLIST beep
+        hz       CDATA   #IMPLIED
+        msecs       CDATA   #IMPLIED
+        vol       CDATA   #IMPLIED
+        >
