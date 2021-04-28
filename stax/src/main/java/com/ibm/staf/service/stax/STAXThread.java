@@ -1500,7 +1500,7 @@ public class STAXThread implements STAXThreadCompleteListener {
                     return;
                 }
             }
-            // 处理action栈空的情况，即action已经执行完
+            // 处理action栈空的情况，即action已经执行完,ReturnCondition会添加Condition
             if (fActionStack.size() == 0) {
                 synchronized (fChildThreadSet) {
                     synchronized (fConditionSet) {
@@ -1533,7 +1533,8 @@ public class STAXThread implements STAXThreadCompleteListener {
                         // XXX: Is it safe to schedule the parent?
                         // XXX: Should addCondition call schedule()?
 
-                        //TODO  condition可继承，但是没有parent thread的情况, action负责删除condition,此种情况说明action没有删除condition。为啥需要删除,不知道???
+                        //TODO  condition可继承，但是没有parent thread的情况, action负责删除condition,
+                        // 此种情况说明action没有删除condition。典型的是可继承的ReturnCondition,
                         if ((fParent == null) && cond.isInheritable()) {
                             fJob.setCompletionStatus(STAXJob.ABNORMAL_STATUS);
 
@@ -1551,10 +1552,7 @@ public class STAXThread implements STAXThreadCompleteListener {
 
                                     List stackTrace = ((STAXExceptionCondition) cond).getStackTrace();
 
-                                    errorMsg.append(
-                                            "\n\n===== Stack Trace =====\n\n" +
-                                                    STAFMarshallingContext.formatObject(
-                                                            stackTrace));
+                                    errorMsg.append("\n\n===== Stack Trace =====\n\n" + STAFMarshallingContext.formatObject(stackTrace));
                                 }
                             }
 
@@ -1627,8 +1625,7 @@ public class STAXThread implements STAXThreadCompleteListener {
             } else {
                 if (fJob.getSTAX().getDebugThread()) {
                     String actionName = action.getClass().getName();
-                    actionName = actionName.substring(
-                            actionName.lastIndexOf(".") + 1);
+                    actionName = actionName.substring(actionName.lastIndexOf(".") + 1);
                     String condName = currCondition.getClass().getName();
                     condName = condName.substring(condName.lastIndexOf(".") + 1);
 

@@ -10,26 +10,26 @@ package com.ibm.staf.service.stax;
 import org.python.core.Py;
 import org.python.core.PyObject;
 
-public class STAXReturnAction extends STAXActionDefaultImpl
-{
-    public STAXReturnAction()
-    { /* Do Nothing */ }
+public class STAXReturnAction extends STAXActionDefaultImpl {
+    public STAXReturnAction() { /* Do Nothing */ }
 
-    public STAXReturnAction(String value)
-    {
+    public STAXReturnAction(String value) {
         fValue = value;
     }
 
-    public String getValue() { return fValue; } 
-    public void setValue(String value) { fValue = value; }
+    public String getValue() {
+        return fValue;
+    }
 
-    public String getXMLInfo()
-    {
+    public void setValue(String value) {
+        fValue = value;
+    }
+
+    public String getXMLInfo() {
         return "<return>" + fValue + "</return>";
     }
 
-    public String getInfo()
-    {
+    public String getInfo() {
         int valueLength = fValue.length();
         if (valueLength > 40)
             return fValue.substring(0, 40) + "...";
@@ -37,49 +37,40 @@ public class STAXReturnAction extends STAXActionDefaultImpl
             return fValue;
     }
 
-    public String getDetails()
-    {
+    public String getDetails() {
         return "Value:" + fValue;
     }
 
-    public void execute(STAXThread thread)
-    { 
-        if (fValue.equals(null))
-        {
+    public void execute(STAXThread thread) {
+        if (fValue.equals(null)) {
             fValue = "None";
         }
 
         thread.popAction();
 
         PyObject result = null;
-        
-        try
-        {
+
+        try {
             result = thread.pyObjectEval(fValue);
             thread.addCondition(new STAXReturnCondition(result));
-        }
-        catch (STAXPythonEvaluationException e)
-        {
+        } catch (STAXPythonEvaluationException e) {
             thread.pySetVar("STAXResult", Py.None);
 
             setElementInfo(new STAXElementInfo(getElement()));
 
-            thread.setSignalMsgVar(
-                "STAXPythonEvalMsg", STAXUtil.formatErrorMessage(this), e);
+            thread.setSignalMsgVar("STAXPythonEvalMsg", STAXUtil.formatErrorMessage(this), e);
 
             thread.raiseSignal("STAXPythonEvaluationError");
         }
     }
 
-    public void handleCondition(STAXThread thread, STAXCondition cond)
-    {
+    public void handleCondition(STAXThread thread, STAXCondition cond) {
         thread.popAction();
     }
 
-    public STAXAction cloneAction()
-    {
+    public STAXAction cloneAction() {
         STAXReturnAction clone = new STAXReturnAction(fValue);
-        
+
         clone.setElement(getElement());
         clone.setLineNumberMap(getLineNumberMap());
         clone.setXmlFile(getXmlFile());

@@ -61,11 +61,11 @@ public class IniAction extends STAXActionDefaultImpl {
                 switch (action) {
                     case "query":
                         String result = wini.get(getSection(), getOption());
-                        // Logger.info("query ini {} {} {} = {}", getPath(), getSection(), getOption(), result);
-                        thread.pySetVar("PEResult", result);
+                        thread.pySetVar(Constants.RESULT, result);
+                        thread.pySetVar(Constants.RC, 0);
                         break;
                     case "update":
-                        if(StringUtils.isEmpty(getValue())) {
+                        if (StringUtils.isEmpty(getValue())) {
                             handleError(thread, "必须提供option值!", null);
                             return;
                         }
@@ -80,6 +80,7 @@ public class IniAction extends STAXActionDefaultImpl {
                         wini.put(getSection(), getOption(), updateValue);
                         try {
                             wini.store(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.path))));
+                            thread.pySetVar(Constants.RC, 0);
                         } catch (IOException e) {
                             handleError(thread, "路径错误:" + getPath(), e);
                             return;
@@ -89,6 +90,7 @@ public class IniAction extends STAXActionDefaultImpl {
                         wini.remove(getSection(), getOption());
                         try {
                             wini.store(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.path))));
+                            thread.pySetVar(Constants.RC, 0);
                         } catch (IOException e) {
                             handleError(thread, "路径错误:" + getPath(), e);
                             return;
@@ -115,8 +117,8 @@ public class IniAction extends STAXActionDefaultImpl {
         }
         setElementInfo(new STAXElementInfo(getElement()));
         thread.popAction();
-        thread.pySetVar("RC", -1);
-        thread.pySetVar("PEResult", msg);
+        thread.pySetVar(Constants.RC, -1);
+        thread.pySetVar(Constants.RESULT, msg);
         thread.setSignalMsgVar(Constants.INI_ERROR, STAXUtil.formatErrorMessage(this));
         thread.raiseSignal(Constants.INI_ERROR);
     }

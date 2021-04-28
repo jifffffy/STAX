@@ -45,7 +45,6 @@ abstract public class XfsCommandAction extends STAXSTAFCommandAction {
 
     public abstract String createRequest(STAXThread thread) throws STAXPythonEvaluationException;
 
-    public abstract STAXSTAFCommandAction createClone();
 
     protected String normalizeRequest(String request) {
         return request
@@ -53,6 +52,8 @@ abstract public class XfsCommandAction extends STAXSTAFCommandAction {
                 .replace("\\n", "")
                 .replace("\'", "\"");
     }
+
+    public abstract STAXSTAFCommandAction createClone();
 
     @Override
     public STAXAction cloneAction() {

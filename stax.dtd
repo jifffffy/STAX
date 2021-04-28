@@ -7,7 +7,7 @@ Response
 
    STAX Extension Elements: []
 
-   Generated Date: 20210427-15:37:27
+   Generated Date: 20210428-10:03:06
 
    This DTD module is identified by the SYSTEM identifier:
 
@@ -48,13 +48,13 @@ Response
                        job | fdk-keys | psb | 
                        retain-slot-start-ex | import | crypt | 
                        nop | stafcmd | timer | 
-                       parallel | hcr | paralleliterate | 
-                       note-type-list | read-image | on | 
-                       rethrow | process | capabilities | 
-                       ini | isr-idc | message | 
-                       cash-in | call-with-list | rpt | 
-                       slots-info | open-shutter | close-shutter | 
-                       tcstatus'>
+                       dialog | parallel | hcr | 
+                       paralleliterate | note-type-list | read-image | 
+                       on | rethrow | process | 
+                       capabilities | ini | isr-idc | 
+                       message | cash-in | call-with-list | 
+                       rpt | slots-info | open-shutter | 
+                       close-shutter | tcstatus'>
 
 <!--================= STAX Job Definition ========================== -->
 <!--
@@ -783,7 +783,7 @@ Response
 <!ATTLIST timer
           duration   CDATA        #REQUIRED
 >
-
+<!ELEMENT dialog     (#PCDATA)>
 <!--================= The Parallel Element ========================= -->
 <!--
      The parallel element performs one or more tasks in parallel.

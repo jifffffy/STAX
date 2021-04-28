@@ -37,7 +37,6 @@ public class IniActionFactory extends ActionFactorySupport<IniAction> {
 
     @Override
     protected void handleChildNode(STAX staxService, STAXJob job, IniAction action, Node root, Node child) throws STAXException {
-        // Logger.info("action = {}", child.getNodeName());
         action.setAction(child.getNodeName());
         NodeList sectionNodes = child.getChildNodes();
         for (int j = 0; j < sectionNodes.getLength(); ++j) {

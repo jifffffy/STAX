@@ -78,6 +78,11 @@ public class XfsServiceAction extends STAXActionDefaultImpl {
 
     }
 
+    @Override
+    public void handleCondition(STAXThread thread, STAXCondition condition) {
+        thread.popAction();
+    }
+
     private void handleException(STAXThread thread, String message, STAXPythonEvaluationException e) {
         state = COMPLETE;
         thread.popAction();

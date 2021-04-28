@@ -1,3 +1,7 @@
+io/jiffy/stax/plugin/pe/action/DialogAction.java
+ io.jiffy.stax.plugin.pe.action.DialogAction
+ io.jiffy.stax.plugin.pe.action.DialogAction$1
+ io.jiffy.stax.plugin.pe.action.DialogAction$State
 io/jiffy/stax/plugin/pe/Constants.java
  io.jiffy.stax.plugin.pe.Constants
 io/jiffy/stax/plugin/pe/factory/IniActionFactory.java
@@ -6,10 +10,14 @@ io/jiffy/stax/plugin/pe/action/IniAction.java
  io.jiffy.stax.plugin.pe.action.IniAction
  io.jiffy.stax.plugin.pe.action.IniAction$1
  io.jiffy.stax.plugin.pe.action.IniAction$State
+io/jiffy/stax/plugin/pe/model/Dialog.java
+ io.jiffy.stax.plugin.pe.model.Dialog
 io/jiffy/stax/plugin/pe/factory/DelayActionFactory.java
  io.jiffy.stax.plugin.pe.factory.DelayActionFactory
 io/jiffy/stax/plugin/pe/action/BeepAction.java
  io.jiffy.stax.plugin.pe.action.BeepAction
+io/jiffy/stax/plugin/pe/factory/DialogActionFactory.java
+ io.jiffy.stax.plugin.pe.factory.DialogActionFactory
 io/jiffy/stax/plugin/pe/PePlugin.java
  io.jiffy.stax.plugin.pe.PePlugin
 io/jiffy/stax/plugin/pe/action/DelayAction.java

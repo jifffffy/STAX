@@ -42,7 +42,7 @@ public class BeepAction extends STAXActionDefaultImpl {
             Logger.error(e);
             setElementInfo(new STAXElementInfo(getElement()));
             thread.popAction();
-            thread.pySetVar("RC", -1);
+            thread.pySetVar(Constants.RC, -1);
             thread.setSignalMsgVar(Constants.BEEP_ERROR, STAXUtil.formatErrorMessage(this));
             thread.raiseSignal(Constants.BEEP_ERROR);
         }
