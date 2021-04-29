@@ -1,5 +1,3 @@
-Response
---------
 <!--
    STAf eXecution (STAX) Document Type Definition (DTD)
 
@@ -75,11 +73,16 @@ Response
 <!ATTLIST defaultcall
           function     IDREF    #REQUIRED
 >
-<!ELEMENT control-media     (#PCDATA)><!ELEMENT beep     EMPTY>
-<!ATTLIST beep
-        hz       CDATA   #IMPLIED
-        msecs       CDATA   #IMPLIED
-        vol       CDATA   #IMPLIED
+<!ELEMENT control-media     (#PCDATA)><!ELEMENT beep     EMPTY>
+
+<!ATTLIST beep
+
+        hz       CDATA   #IMPLIED
+
+        msecs       CDATA   #IMPLIED
+
+        vol       CDATA   #IMPLIED
+
         ><!ELEMENT card-unit-info     EMPTY><!ELEMENT fig     (%task;)>
 <!--================= The Release Element ========================== -->
 <!--
@@ -132,8 +135,10 @@ Response
 <!ATTLIST signalhandler
           signal     CDATA        #REQUIRED
 >
-<!ELEMENT eject-slot-start     (type, cmdData)>
-<!ELEMENT type     (#PCDATA)>
+<!ELEMENT eject-slot-start     (type, cmdData)>
+
+<!ELEMENT type     (#PCDATA)>
+
 <!ELEMENT cmdData     (#PCDATA)><!ELEMENT epp     (%task;)><!ELEMENT retain-slot-end     (#PCDATA)><!ELEMENT cash-in-start     (#PCDATA)><!ELEMENT retain-card     (#PCDATA)>
 <!--================= The Script Element =========================== -->
 <!--
@@ -1215,31 +1220,56 @@ Response
 <!ATTLIST other
           if        CDATA     "1"
 >
-<!ELEMENT capabilities     EMPTY><!--
-<ini load="file/path">
-  <query>
-    <section name="xxx">
-      <option name="yyy"></option>
-    </section>
-  </query>
-</ini>
--->
-<!ELEMENT ini     (query| update| remove)>
-        <!ATTLIST ini
-                path       CDATA   #IMPLIED
-                >
-        <!ELEMENT query     (section)>
-
-        <!ELEMENT update     (section)>
-        <!ELEMENT remove     (section)>
-
-        <!ELEMENT section     (option)>
-        <!ATTLIST section
-                name       CDATA   #IMPLIED
-                >
-        <!ELEMENT option     (#PCDATA)>
-        <!ATTLIST option
-                name       CDATA   #IMPLIED
+<!ELEMENT capabilities     EMPTY><!--
+
+<ini load="file/path">
+
+  <query>
+
+    <section name="xxx">
+
+      <option name="yyy"></option>
+
+    </section>
+
+  </query>
+
+</ini>
+
+-->
+
+<!ELEMENT ini     (query| update| remove)>
+
+        <!ATTLIST ini
+
+                path       CDATA   #IMPLIED
+
+                >
+
+        <!ELEMENT query     (section)>
+
+
+
+        <!ELEMENT update     (section)>
+
+        <!ELEMENT remove     (section)>
+
+
+
+        <!ELEMENT section     (option)>
+
+        <!ATTLIST section
+
+                name       CDATA   #IMPLIED
+
+                >
+
+        <!ELEMENT option     (#PCDATA)>
+
+        <!ATTLIST option
+
+                name       CDATA   #IMPLIED
+
                 ><!ELEMENT isr-idc     (%task;)>
 <!--================= The Message Element ========================== -->
 <!--
