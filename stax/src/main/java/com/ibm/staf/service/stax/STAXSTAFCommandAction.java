@@ -26,24 +26,24 @@ import java.util.TreeMap;
  */
 public class STAXSTAFCommandAction extends STAXActionDefaultImpl implements STAXSTAFRequestCompleteListener {
     // Initial state of the action 
-    static final int INIT = 0;
+    public static final int INIT = 0;
 
     // State where the STAF request command has been submitted, and
     // now it's waiting for it to complete 
-    static final int WAIT_REQUEST_COMMAND = 1;
+    public static final int WAIT_REQUEST_COMMAND = 1;
 
     // State where the action has been notified that the STAF command is
     // complete
-    static final int COMMAND_COMPLETE = 2;
+    public static final int COMMAND_COMPLETE = 2;
 
     // Completion state of the action
-    static final int COMPLETE = 3;
+    public static final int COMPLETE = 3;
 
-    static final String INIT_STRING = "INIT";
-    static final String WAIT_REQUEST_COMMAND_STRING = "WAIT_REQUEST";
-    static final String COMMAND_COMPLETE_STRING = "COMMAND_COMPLETE";
-    static final String COMPLETE_STRING = "COMPLETE";
-    static final String STATE_UNKNOWN_STRING = "UNKNOWN";
+    public static final String INIT_STRING = "INIT";
+    public static final String WAIT_REQUEST_COMMAND_STRING = "WAIT_REQUEST";
+    public static final String COMMAND_COMPLETE_STRING = "COMMAND_COMPLETE";
+    public static final String COMPLETE_STRING = "COMPLETE";
+    public static final String STATE_UNKNOWN_STRING = "UNKNOWN";
 
     /**
      * Creates a new STAXSTAFCommandAction instance.
@@ -381,17 +381,7 @@ public class STAXSTAFCommandAction extends STAXActionDefaultImpl implements STAX
                 fCurrentBlockName = "";  //Shouldn't happen
             }
 
-            HashMap<String, String> stafCmdMap = new HashMap<String, String>();
-            stafCmdMap.put("type", "command");
-            stafCmdMap.put("block", fCurrentBlockName);
-            stafCmdMap.put("status", "start");
-            stafCmdMap.put("location", fLocation);
-            stafCmdMap.put("requestNumber", String.valueOf(fRequestNumber));
-            stafCmdMap.put("service", fService);
-            stafCmdMap.put("request", STAFUtil.maskPrivateData(fRequest));
-            stafCmdMap.put("name", fName);
-
-            fThread.getJob().generateEvent(STAXSTAFCommandActionFactory.STAX_STAFCOMMAND_EVENT, stafCmdMap);
+            fireEvent("start", fThread);
         } else if (fState == COMMAND_COMPLETE) {
             TreeMap stafcmds = (TreeMap) fThread.getJob().getData("stafcmdRequestMap");
 
@@ -431,17 +421,7 @@ public class STAXSTAFCommandAction extends STAXActionDefaultImpl implements STAX
 
             // Generate an event to indicate that the STAF command is stopped
 
-            HashMap<String, String> stafCmdMap = new HashMap<String, String>();
-            stafCmdMap.put("type", "command");
-            stafCmdMap.put("block", fCurrentBlockName);
-            stafCmdMap.put("status", "stop");
-            stafCmdMap.put("location", fLocation);
-            stafCmdMap.put("requestNumber", String.valueOf(fRequestNumber));
-            stafCmdMap.put("service", fService);
-            stafCmdMap.put("request", STAFUtil.maskPrivateData(fRequest));
-            stafCmdMap.put("name", fName);
-
-            thread.getJob().generateEvent(STAXSTAFCommandActionFactory.STAX_STAFCOMMAND_EVENT, stafCmdMap);
+            fireEvent("stop", thread);
 
             // Remove the hold condition that was added when the STAF command
             // was submitted by the init() method
@@ -490,17 +470,7 @@ public class STAXSTAFCommandAction extends STAXActionDefaultImpl implements STAX
     public synchronized void requestComplete(int requestNumber, STAFResult result) {
         if (fState == COMPLETE) return;
 
-        HashMap<String, String> stafCmdMap = new HashMap<String, String>();
-        stafCmdMap.put("type", "command");
-        stafCmdMap.put("block", fCurrentBlockName);
-        stafCmdMap.put("status", "stop");
-        stafCmdMap.put("location", fLocation);
-        stafCmdMap.put("requestNumber", String.valueOf(fRequestNumber));
-        stafCmdMap.put("service", fService);
-        stafCmdMap.put("request", STAFUtil.maskPrivateData(fRequest));
-        stafCmdMap.put("name", fName);
-
-        fThread.getJob().generateEvent(STAXSTAFCommandActionFactory.STAX_STAFCOMMAND_EVENT, stafCmdMap);
+        fireEvent("stop", fThread);
 
         fRequestRC = result.rc;
         fRequestResult = result.result;
@@ -527,13 +497,34 @@ public class STAXSTAFCommandAction extends STAXActionDefaultImpl implements STAX
         fState = COMMAND_COMPLETE;
         //TODO  移除fHoldCondition
         fThread.removeCondition(fHoldCondition);
+        //TODO  hook point
+        doComplete(fThread, fRequestRC);
         //TODO 希望再次运行这个action, 如果不调用schedule, 这个异步线程将会退出，造成这个action不会被再次执行
-        // 异步线程调用schedule,由异步线程执行这个action
+        // 异步线程调用schedule,把这个action添加到ThreadQueue,由引擎继续执行这个STAXThread的actionStack
         fThread.schedule();
     }
 
-    STAXThread fThread = null;
-    int fState = INIT;
+
+     public void doComplete(STAXThread thread, int RC) {
+
+    }
+
+    protected void fireEvent(String stop, STAXThread fThread) {
+        HashMap<String, String> stafCmdMap = new HashMap<>();
+        stafCmdMap.put("type", "command");
+        stafCmdMap.put("block", fCurrentBlockName);
+        stafCmdMap.put("status", stop);
+        stafCmdMap.put("location", fLocation);
+        stafCmdMap.put("requestNumber", String.valueOf(fRequestNumber));
+        stafCmdMap.put("service", fService);
+        stafCmdMap.put("request", STAFUtil.maskPrivateData(fRequest));
+        stafCmdMap.put("name", fName);
+
+        fThread.getJob().generateEvent(STAXSTAFCommandActionFactory.STAX_STAFCOMMAND_EVENT, stafCmdMap);
+    }
+
+    private STAXThread fThread = null;
+    private int fState = INIT;
     private final STAXHoldThreadCondition fHoldCondition = new STAXHoldThreadCondition("STAFCommand");
 
     protected String fLocation = "";

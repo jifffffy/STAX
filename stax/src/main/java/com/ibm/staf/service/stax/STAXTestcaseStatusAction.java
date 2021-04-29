@@ -12,54 +12,51 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
 
-public class STAXTestcaseStatusAction extends STAXActionDefaultImpl
-{
-    public STAXTestcaseStatusAction()
-    { /* Do Nothing */ }
+public class STAXTestcaseStatusAction extends STAXActionDefaultImpl {
+    public STAXTestcaseStatusAction() { /* Do Nothing */ }
 
-    public STAXTestcaseStatusAction(String status, String message)
-    {
+    public STAXTestcaseStatusAction(String status, String message) {
         fUnevalStatus = status;
-        fStatus = status;        
+        fStatus = status;
         fUnevalMessage = message;
         fMessage = message;
     }
 
-    public void setStatus(String status) { fUnevalStatus = status; }
-    public void setMessage(String message) { fUnevalMessage = message; }
+    public void setStatus(String status) {
+        fUnevalStatus = status;
+    }
 
-    public String getXMLInfo()
-    {
+    public void setMessage(String message) {
+        fUnevalMessage = message;
+    }
+
+    public String getXMLInfo() {
         String msg = "<tcstatus result=\"";
-        msg += fStatus;        
+        msg += fStatus;
         msg += "\">" + fMessage + "</tcstatus>";
 
         return msg;
     }
 
-    public String getInfo()
-    {
-        return fStatus;        
+    public String getInfo() {
+        return fStatus;
     }
 
-    public String getDetails()
-    {
-        return "Status:" + fStatus + 
-               ";Message:" + fMessage;
+    public String getDetails() {
+        return "Status:" + fStatus +
+                ";Message:" + fMessage;
     }
 
-    public void execute(STAXThread thread)
-    {
+    public void execute(STAXThread thread) {
         thread.popAction();
 
         String evalAttr = "result";
 
-        try
-        {
+        try {
             if (fUnevalStatus == null)
                 fStatus = new String();
             else
-                fStatus = thread.pyStringEval(fUnevalStatus);        
+                fStatus = thread.pyStringEval(fUnevalStatus);
 
             evalAttr = STAXElementInfo.NO_ATTRIBUTE_NAME;
 
@@ -67,13 +64,11 @@ public class STAXTestcaseStatusAction extends STAXActionDefaultImpl
                 fMessage = new String();
             else
                 fMessage = thread.pyStringEval(fUnevalMessage);
-        }
-        catch (STAXPythonEvaluationException e)
-        {
+        } catch (STAXPythonEvaluationException e) {
             setElementInfo(new STAXElementInfo(getElement(), evalAttr));
 
             thread.setSignalMsgVar(
-                "STAXPythonEvalMsg", STAXUtil.formatErrorMessage(this), e);
+                    "STAXPythonEvalMsg", STAXUtil.formatErrorMessage(this), e);
 
             thread.raiseSignal("STAXPythonEvaluationError");
 
@@ -83,20 +78,17 @@ public class STAXTestcaseStatusAction extends STAXActionDefaultImpl
         // Get Current Testcase
 
         String testcaseName;
-        try
-        {
+        try {
             testcaseName = thread.pyStringEval("STAXCurrentTestcase");
             if (testcaseName.equals("None"))
                 throw new STAXPythonEvaluationException("");
-        }
-        catch (STAXPythonEvaluationException e)
-        {
+        } catch (STAXPythonEvaluationException e) {
             // Raise a signal if no testcase wrapper element for tcstatus.
 
             setElementInfo(new STAXElementInfo(getElement(), evalAttr));
 
             thread.setSignalMsgVar(
-                "STAXTestcaseMissingMsg", STAXUtil.formatErrorMessage(this));
+                    "STAXTestcaseMissingMsg", STAXUtil.formatErrorMessage(this));
 
             thread.raiseSignal("STAXTestcaseMissingError");
 
@@ -106,19 +98,18 @@ public class STAXTestcaseStatusAction extends STAXActionDefaultImpl
         // Raise a signal if status result is not valid
 
         if (!STAXTestcaseActionFactory.VALID_STATUS_LIST.contains(
-            fStatus.toLowerCase()))
-        {
+                fStatus.toLowerCase())) {
             setElementInfo(new STAXElementInfo(
-                getElement(), "result", "Invalid result: " + fStatus));
+                    getElement(), "result", "Invalid result: " + fStatus));
 
             thread.setSignalMsgVar(
-                "STAXInvalidTcStatusResultMsg",
-                STAXUtil.formatErrorMessage(this));
+                    "STAXInvalidTcStatusResultMsg",
+                    STAXUtil.formatErrorMessage(this));
 
             thread.raiseSignal("STAXInvalidTcStatusResult");
 
             return;
-        } 
+        }
 
         // Update Testcase Status
 
@@ -126,40 +117,33 @@ public class STAXTestcaseStatusAction extends STAXActionDefaultImpl
 
         @SuppressWarnings("unchecked")
         TreeMap<String, STAXTestcase> testcaseMap =
-            (TreeMap<String, STAXTestcase>)thread.getJob().getData(
-                "testcaseMap");
+                (TreeMap<String, STAXTestcase>) thread.getJob().getData(
+                        "testcaseMap");
 
-        if (testcaseMap != null)
-        {
-            synchronized (testcaseMap)
-            {
+        if (testcaseMap != null) {
+            synchronized (testcaseMap) {
                 theTest = testcaseMap.get(testcaseName);
 
-                if (theTest == null)
-                {
+                if (theTest == null) {
                     List<String> testcaseStack = new ArrayList<String>();
 
-                    try
-                    {
-                        if (thread.pyBoolEval("len(STAXTestcaseStack) > 0"))
-                        {
+                    try {
+                        if (thread.pyBoolEval("len(STAXTestcaseStack) > 0")) {
                             testcaseStack = new ArrayList<String>(Arrays.asList(
-                                (String[])thread.getPythonInterpreter().get(
-                                    "STAXTestcaseStack", String[].class)));
+                                    (String[]) thread.getPythonInterpreter().get(
+                                            "STAXTestcaseStack", String[].class)));
                         }
 
                         theTest = new STAXTestcase(testcaseName, testcaseStack);
-                    }
-                    catch (STAXPythonEvaluationException e)
-                    {
+                    } catch (STAXPythonEvaluationException e) {
                         // Should never happen
-                        
+
                         STAX.logToJVMLog(
-                            "Error", thread,
-                            "STAXTestcaseStatusAction::execute() - " +
-                            "Error getting STAXTestcaseStack Python " +
-                            "variable.  Testcase: " + testcaseName +
-                            ".  " + e.toString());
+                                "Error", thread,
+                                "STAXTestcaseStatusAction::execute() - " +
+                                        "Error getting STAXTestcaseStack Python " +
+                                        "variable.  Testcase: " + testcaseName +
+                                        ".  " + e.toString());
 
                         theTest = new STAXTestcase(testcaseName);
                     }
@@ -172,13 +156,11 @@ public class STAXTestcaseStatusAction extends STAXActionDefaultImpl
         }
     }
 
-    public void handleCondition(STAXThread thread, STAXCondition cond)
-    {
+    public void handleCondition(STAXThread thread, STAXCondition cond) {
         thread.popAction();
     }
 
-    public STAXAction cloneAction()
-    {
+    public STAXAction cloneAction() {
         STAXTestcaseStatusAction clone = new STAXTestcaseStatusAction();
 
         clone.setElement(getElement());

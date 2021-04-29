@@ -7,7 +7,7 @@ Response
 
    STAX Extension Elements: []
 
-   Generated Date: 20210428-10:03:06
+   Generated Date: 20210429-10:27:08
 
    This DTD module is identified by the SYSTEM identifier:
 
@@ -27,34 +27,34 @@ Response
                        epp | retain-slot-end | cash-in-start | 
                        retain-card | script | call-with-map | 
                        delay | ukey-isr | doc | 
-                       terminate | reset-count | card-isr | 
-                       media-list | start-exchange | status | 
-                       read-form | log | eject-card | 
-                       configure-note-types | cash-in-end | digitalio | 
-                       bcr | initialization | set-cash-unit-info | 
-                       iterate | print-form | break | 
-                       read-input | rtn | testcase | 
-                       breakpoint | call | write-raw-data | 
-                       throw | retract | cash-in-rollback | 
-                       end-exchange | return | open | 
-                       acc | import-rsa-public-key | retain-slot-start | 
-                       action-keys | read-raw-data | hold | 
-                       dis | loop | continue | 
-                       raise | dispense-card | mcr | 
-                       enable-events | cash-in-status | mcr-idc | 
-                       dispense | trd | jnl | 
-                       import-key | sequence | set-card-unit-info | 
-                       idr | currency-exp | try | 
-                       job | fdk-keys | psb | 
-                       retain-slot-start-ex | import | crypt | 
-                       nop | stafcmd | timer | 
-                       dialog | parallel | hcr | 
-                       paralleliterate | note-type-list | read-image | 
-                       on | rethrow | process | 
-                       capabilities | ini | isr-idc | 
-                       message | cash-in | call-with-list | 
-                       rpt | slots-info | open-shutter | 
-                       close-shutter | tcstatus'>
+                       reset | terminate | reset-count | 
+                       card-isr | media-list | start-exchange | 
+                       status | read-form | log | 
+                       eject-card | configure-note-types | cash-in-end | 
+                       digitalio | bcr | initialization | 
+                       set-cash-unit-info | iterate | print-form | 
+                       break | read-input | rtn | 
+                       testcase | breakpoint | call | 
+                       write-raw-data | throw | retract | 
+                       cash-in-rollback | end-exchange | return | 
+                       open | acc | import-rsa-public-key | 
+                       retain-slot-start | action-keys | read-raw-data | 
+                       hold | dis | loop | 
+                       continue | raise | dispense-card | 
+                       mcr | enable-events | cash-in-status | 
+                       mcr-idc | dispense | trd | 
+                       jnl | import-key | sequence | 
+                       set-card-unit-info | idr | currency-exp | 
+                       try | job | fdk-keys | 
+                       psb | retain-slot-start-ex | import | 
+                       crypt | nop | stafcmd | 
+                       timer | dialog | parallel | 
+                       hcr | paralleliterate | note-type-list | 
+                       read-image | on | rethrow | 
+                       process | capabilities | ini | 
+                       isr-idc | message | cash-in | 
+                       call-with-list | rpt | slots-info | 
+                       open-shutter | close-shutter | tcstatus'>
 
 <!--================= STAX Job Definition ========================== -->
 <!--
@@ -157,7 +157,7 @@ Response
 <!ATTLIST call-map-arg
           name       CDATA    #REQUIRED
 >
-<!ELEMENT delay     (#PCDATA)><!ELEMENT ukey-isr     (%task;)><!ELEMENT doc     (%task;)>
+<!ELEMENT delay     (#PCDATA)><!ELEMENT ukey-isr     (%task;)><!ELEMENT doc     (%task;)><!ELEMENT reset     (#PCDATA)>
 <!--================= The Terminate Element ======================== -->
 <!--
      The terminate element specifies to terminate a block in the job.
