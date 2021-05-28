@@ -13,7 +13,7 @@ public abstract class XfsExecuteCommandMapParamAction extends XfsExecuteCommandA
 
     /**
      * 可以处理Map类型的参数
-     *
+     * 实现参考 STAXCallAction
      * @param thread
      * @return
      * @throws STAXPythonEvaluationException

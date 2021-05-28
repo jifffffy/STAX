@@ -7,7 +7,7 @@ Response
 
    STAX Extension Elements: []
 
-   Generated Date: 20210528-11:49:11
+   Generated Date: 20210528-13:35:05
 
    This DTD module is identified by the SYSTEM identifier:
 
@@ -134,7 +134,10 @@ Response
 >
 <!ELEMENT eject-slot-start     (type, cmdData)>
 <!ELEMENT type     (#PCDATA)>
-<!ELEMENT cmdData     (#PCDATA)><!ELEMENT epp     (%task;)><!ELEMENT retain-slot-end     (#PCDATA)><!ELEMENT cash-in-start     (#PCDATA)><!ELEMENT retain-card     (#PCDATA)>
+<!ELEMENT cmdData     (#PCDATA)><!ELEMENT epp     (%task;)><!ELEMENT retain-slot-end     (#PCDATA)><!ELEMENT cash-in-start     (#PCDATA)><!ELEMENT retain-card     (#PCDATA)>
+<!ATTLIST retain-card
+                events       CDATA   #IMPLIED
+                >
 <!--================= The Script Element =========================== -->
 <!--
      Specifies Python code to be executed.

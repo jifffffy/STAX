@@ -1,1 +1,4 @@
 <!ELEMENT retain-card     (#PCDATA)>
+<!ATTLIST retain-card
+                events       CDATA   #IMPLIED
+                >

@@ -181,13 +181,9 @@ public class STAXCallAction extends STAXActionDefaultImpl {
         STAXAction function = thread.getJob().getFunction(fName);
 
         if (function == null) {
-            setElementInfo(new STAXElementInfo(
-                    getElement(), "function",
-                    "Function does not exist: " + fName));
+            setElementInfo(new STAXElementInfo(getElement(), "function", "Function does not exist: " + fName));
 
-            thread.setSignalMsgVar(
-                    "STAXFunctionDoesNotExistMsg",
-                    STAXUtil.formatErrorMessage(this));
+            thread.setSignalMsgVar("STAXFunctionDoesNotExistMsg", STAXUtil.formatErrorMessage(this));
 
             thread.raiseSignal("STAXFunctionDoesNotExist");
 
@@ -210,8 +206,7 @@ public class STAXCallAction extends STAXActionDefaultImpl {
                 // Evaluate fArgs data and put into a Python object
 
                 if (fArgs != null) {
-                    setElementInfo(new STAXElementInfo(
-                            getElement(), STAXElementInfo.NO_ATTRIBUTE_NAME));
+                    setElementInfo(new STAXElementInfo(getElement(), STAXElementInfo.NO_ATTRIBUTE_NAME));
 
                     args = thread.pyObjectEval(fArgs);
                 }
@@ -251,22 +246,16 @@ public class STAXCallAction extends STAXActionDefaultImpl {
                     if (value == null || value.equals("")) value = "None";
 
                     try {
-                        evalArgMap.put(Py.java2py(thread.pyObjectEval(key)),
-                                Py.java2py(thread.pyObjectEval(value)));
+                        evalArgMap.put(Py.java2py(thread.pyObjectEval(key)), Py.java2py(thread.pyObjectEval(value)));
                     } catch (STAXPythonEvaluationException ex) {
                         throw ex;
                     } catch (Exception ex) {
                         // Can get "TypeError: unhashable type" if don't
                         // specify the key in Python
 
-                        setElementInfo(new STAXElementInfo(
-                                elemName, attrName, elemIndex,
-                                "Invalid argument name: " + key + "\n\n" +
-                                        ex.toString()));
+                        setElementInfo(new STAXElementInfo(elemName, attrName, elemIndex, "Invalid argument name: " + key + "\n\n" + ex.toString()));
 
-                        thread.setSignalMsgVar(
-                                "STAXFunctionArgValidateMsg",
-                                STAXUtil.formatErrorMessage(this));
+                        thread.setSignalMsgVar("STAXFunctionArgValidateMsg", STAXUtil.formatErrorMessage(this));
 
                         thread.raiseSignal("STAXFunctionArgValidate");
 
@@ -282,9 +271,7 @@ public class STAXCallAction extends STAXActionDefaultImpl {
         } catch (STAXPythonEvaluationException e) {
             setElementInfo(new STAXElementInfo(elemName, attrName, elemIndex));
 
-            thread.setSignalMsgVar(
-                    "STAXPythonEvalMsg",
-                    STAXUtil.formatErrorMessage(this), e);
+            thread.setSignalMsgVar("STAXPythonEvalMsg", STAXUtil.formatErrorMessage(this), e);
 
             thread.raiseSignal("STAXPythonEvaluationError");
 
