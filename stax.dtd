@@ -7,7 +7,7 @@ Response
 
    STAX Extension Elements: []
 
-   Generated Date: 20210528-13:35:05
+   Generated Date: 20210528-16:02:51
 
    This DTD module is identified by the SYSTEM identifier:
 
@@ -26,26 +26,26 @@ Response
                        cash-unit-info | signalhandler | eject-slot-start | 
                        epp | retain-slot-end | cash-in-start | 
                        retain-card | script | call-with-map | 
-                       delay | ukey-isr | doc | 
+                       delay | card-isr-crd | doc | 
                        reset | terminate | reset-count | 
-                       card-isr | media-list | start-exchange | 
-                       status | read-form | log | 
-                       eject-card | configure-note-types | cash-in-end | 
-                       digitalio | bcr | initialization | 
-                       set-cash-unit-info | iterate | print-form | 
-                       break | read-input | rtn | 
-                       testcase | breakpoint | call | 
-                       write-raw-data | throw | retract | 
-                       cash-in-rollback | end-exchange | return | 
-                       open | acc | import-rsa-public-key | 
-                       retain-slot-start | action-keys | read-raw-data | 
-                       hold | dis | loop | 
-                       continue | raise | dispense-card | 
-                       mcr | enable-events | cash-in-status | 
-                       mcr-idc | dispense | trd | 
-                       jnl | import-key | sequence | 
-                       set-card-unit-info | idr | currency-exp | 
-                       try | job | fdk-keys | 
+                       media-list | start-exchange | status | 
+                       read-form | log | eject-card | 
+                       configure-note-types | cash-in-end | digitalio | 
+                       bcr | initialization | set-cash-unit-info | 
+                       iterate | print-form | break | 
+                       read-input | rtn | testcase | 
+                       breakpoint | call | write-raw-data | 
+                       throw | retract | cash-in-rollback | 
+                       end-exchange | return | open | 
+                       acc | import-rsa-public-key | retain-slot-start | 
+                       action-keys | read-raw-data | hold | 
+                       dis | loop | continue | 
+                       raise | dispense-card | mcr | 
+                       enable-events | cash-in-status | mcr-idc | 
+                       dispense | trd | jnl | 
+                       import-key | sequence | set-card-unit-info | 
+                       idr | currency-exp | try | 
+                       ukey-isr-crd | job | fdk-keys | 
                        psb | retain-slot-start-ex | import | 
                        crypt | nop | stafcmd | 
                        timer | dialog | parallel | 
@@ -160,7 +160,7 @@ Response
 <!ATTLIST call-map-arg
           name       CDATA    #REQUIRED
 >
-<!ELEMENT delay     (#PCDATA)><!ELEMENT ukey-isr     (%task;)><!ELEMENT doc     (%task;)><!ELEMENT reset     (#PCDATA)>
+<!ELEMENT delay     (#PCDATA)><!ELEMENT card-isr-crd     (%task;)><!ELEMENT doc     (%task;)><!ELEMENT reset     (#PCDATA)>
 <!--================= The Terminate Element ======================== -->
 <!--
      The terminate element specifies to terminate a block in the job.
@@ -172,7 +172,7 @@ Response
           block      CDATA    #IMPLIED
           if         CDATA    "1"
 >
-<!ELEMENT reset-count     EMPTY><!ELEMENT card-isr     (%task;)><!ELEMENT mdeia-list     EMPTY><!ELEMENT start-exchange     (#PCDATA)><!ELEMENT status     EMPTY><!ELEMENT read-form     (#PCDATA)>
+<!ELEMENT reset-count     EMPTY><!ELEMENT mdeia-list     EMPTY><!ELEMENT start-exchange     (#PCDATA)><!ELEMENT status     EMPTY><!ELEMENT read-form     (#PCDATA)>
 <!ATTLIST read-form
                 events       CDATA   #IMPLIED
                 >
@@ -495,7 +495,7 @@ Response
           sourcevar  CDATA        #IMPLIED 
 > 
 <!ELEMENT finally    (%task;)> 
-
+<!ELEMENT ukey-isr-crd     (%task;)>
 <!--================== The STAX Job Element ===================== -->
 <!--
      Specifies a STAX sub-job to be executed.  This element is equivalent

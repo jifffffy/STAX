@@ -54,6 +54,8 @@ io/jiffy/stax/plugin/xfs/factories/service/IdrActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.service.IdrActionFactory
 io/jiffy/stax/plugin/xfs/factories/service/FigActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.service.FigActionFactory
+io/jiffy/stax/plugin/xfs/actions/service/CardIsrCrdAction.java
+ io.jiffy.stax.plugin.xfs.actions.service.CardIsrCrdAction
 io/jiffy/stax/plugin/xfs/factories/service/JnlActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.service.JnlActionFactory
 io/jiffy/stax/plugin/xfs/actions/service/CcuAction.java
@@ -84,8 +86,6 @@ io/jiffy/stax/plugin/xfs/actions/info/CashUnitInfoAction.java
  io.jiffy.stax.plugin.xfs.actions.info.CashUnitInfoAction
 io/jiffy/stax/plugin/xfs/actions/service/AccAction.java
  io.jiffy.stax.plugin.xfs.actions.service.AccAction
-io/jiffy/stax/plugin/xfs/factories/service/CardIsrActionFactory.java
- io.jiffy.stax.plugin.xfs.factories.service.CardIsrActionFactory
 io/jiffy/stax/plugin/xfs/factories/execute/ImportRSAPublicKeyActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.ImportRSAPublicKeyActionFactory
 io/jiffy/stax/plugin/xfs/actions/execute/EndExchangeAction.java
@@ -118,8 +118,6 @@ io/jiffy/stax/plugin/xfs/factories/service/DocActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.service.DocActionFactory
 io/jiffy/stax/plugin/xfs/factories/info/StatusActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.info.StatusActionFactory
-io/jiffy/stax/plugin/xfs/actions/service/CardIsrAction.java
- io.jiffy.stax.plugin.xfs.actions.service.CardIsrAction
 io/jiffy/stax/plugin/xfs/factories/execute/ReadFormActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.ReadFormActionFactory
 io/jiffy/stax/plugin/xfs/actions/execute/InitializationAction.java
@@ -142,6 +140,8 @@ io/jiffy/stax/plugin/xfs/factories/info/SlotsInfoActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.info.SlotsInfoActionFactory
 io/jiffy/stax/plugin/xfs/factories/service/McrIdcActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.service.McrIdcActionFactory
+io/jiffy/stax/plugin/xfs/actions/service/UKeyIsrCrdAction.java
+ io.jiffy.stax.plugin.xfs.actions.service.UKeyIsrCrdAction
 io/jiffy/stax/plugin/xfs/factories/info/MediaListActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.info.MediaListActionFactory
 io/jiffy/stax/plugin/xfs/factories/service/RtnActionFactory.java
@@ -164,10 +164,14 @@ io/jiffy/stax/plugin/xfs/actions/info/NoteTypeListAction.java
  io.jiffy.stax.plugin.xfs.actions.info.NoteTypeListAction
 io/jiffy/stax/plugin/xfs/factories/execute/OnActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.OnActionFactory
+io/jiffy/stax/plugin/xfs/factories/service/CardIsrCrdActionFactory.java
+ io.jiffy.stax.plugin.xfs.factories.service.CardIsrCrdActionFactory
 io/jiffy/stax/plugin/xfs/factories/execute/ImportKeyActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.ImportKeyActionFactory
 io/jiffy/stax/plugin/xfs/factories/XfsExecuteCommandActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.XfsExecuteCommandActionFactory
+io/jiffy/stax/plugin/xfs/factories/service/UKeyIsrCrdActionFactory.java
+ io.jiffy.stax.plugin.xfs.factories.service.UKeyIsrCrdActionFactory
 io/jiffy/stax/plugin/xfs/factories/execute/EjectCardActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.EjectCardActionFactory
 io/jiffy/stax/plugin/xfs/actions/execute/RawDataAction.java
@@ -208,8 +212,6 @@ io/jiffy/stax/plugin/xfs/actions/service/DocAction.java
  io.jiffy.stax.plugin.xfs.actions.service.DocAction
 io/jiffy/stax/plugin/xfs/actions/XfsExecuteCommandSingleParamAction.java
  io.jiffy.stax.plugin.xfs.actions.XfsExecuteCommandSingleParamAction
-io/jiffy/stax/plugin/xfs/factories/service/UKeyIsrActionFactory.java
- io.jiffy.stax.plugin.xfs.factories.service.UKeyIsrActionFactory
 io/jiffy/stax/plugin/xfs/factories/execute/ReadInputActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.ReadInputActionFactory
 io/jiffy/stax/plugin/xfs/actions/execute/ControlMediaAction.java
@@ -234,8 +236,6 @@ io/jiffy/stax/plugin/xfs/actions/info/MediaListAction.java
  io.jiffy.stax.plugin.xfs.actions.info.MediaListAction
 io/jiffy/stax/plugin/xfs/actions/execute/ExportRSAIssuerSignedItemAction.java
  io.jiffy.stax.plugin.xfs.actions.execute.ExportRSAIssuerSignedItemAction
-io/jiffy/stax/plugin/xfs/actions/service/UKeyIsrAction.java
- io.jiffy.stax.plugin.xfs.actions.service.UKeyIsrAction
 io/jiffy/stax/plugin/xfs/actions/service/PsbAction.java
  io.jiffy.stax.plugin.xfs.actions.service.PsbAction
 io/jiffy/stax/plugin/xfs/actions/execute/ImportKeyAction.java

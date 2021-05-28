@@ -14,6 +14,6 @@ public class SetCardUnitInfoAction extends XfsExecuteCommandMapParamAction {
 
     @Override
     public String createCommand() {
-        return "setCardUnitInfo";
+        return "setCardUnitInfo cardUnitInfo";
     }
 }

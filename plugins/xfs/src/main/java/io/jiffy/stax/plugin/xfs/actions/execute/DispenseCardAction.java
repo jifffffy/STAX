@@ -17,7 +17,7 @@ public class DispenseCardAction extends XfsExecuteCommandMapParamAction {
 
     @Override
     public String createCommand() {
-        return "dispenseCard";
+        return "dispenseCard dispense";
     }
 
 }
