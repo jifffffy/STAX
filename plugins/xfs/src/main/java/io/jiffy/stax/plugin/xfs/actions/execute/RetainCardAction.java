@@ -10,6 +10,7 @@ public class RetainCardAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         RetainCardAction clone = new RetainCardAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

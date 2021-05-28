@@ -8,6 +8,7 @@ public class ReadImageAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         ReadImageAction clone = new ReadImageAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

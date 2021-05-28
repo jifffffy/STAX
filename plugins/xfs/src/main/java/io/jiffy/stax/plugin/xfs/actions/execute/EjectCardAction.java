@@ -10,6 +10,7 @@ public class EjectCardAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         EjectCardAction clone = new EjectCardAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

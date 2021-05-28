@@ -10,6 +10,7 @@ public class WriteRawDataAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         WriteRawDataAction clone = new WriteRawDataAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

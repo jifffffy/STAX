@@ -116,9 +116,7 @@ public class STAXTestcaseStatusAction extends STAXActionDefaultImpl {
         STAXTestcase theTest = null;
 
         @SuppressWarnings("unchecked")
-        TreeMap<String, STAXTestcase> testcaseMap =
-                (TreeMap<String, STAXTestcase>) thread.getJob().getData(
-                        "testcaseMap");
+        TreeMap<String, STAXTestcase> testcaseMap = (TreeMap<String, STAXTestcase>) thread.getJob().getData("testcaseMap");
 
         if (testcaseMap != null) {
             synchronized (testcaseMap) {
@@ -129,9 +127,7 @@ public class STAXTestcaseStatusAction extends STAXActionDefaultImpl {
 
                     try {
                         if (thread.pyBoolEval("len(STAXTestcaseStack) > 0")) {
-                            testcaseStack = new ArrayList<String>(Arrays.asList(
-                                    (String[]) thread.getPythonInterpreter().get(
-                                            "STAXTestcaseStack", String[].class)));
+                            testcaseStack = new ArrayList<String>(Arrays.asList((String[]) thread.getPythonInterpreter().get("STAXTestcaseStack", String[].class)));
                         }
 
                         theTest = new STAXTestcase(testcaseName, testcaseStack);

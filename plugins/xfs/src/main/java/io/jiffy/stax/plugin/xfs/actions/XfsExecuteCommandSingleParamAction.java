@@ -3,7 +3,7 @@ package io.jiffy.stax.plugin.xfs.actions;
 import com.ibm.staf.service.stax.STAXPythonEvaluationException;
 import com.ibm.staf.service.stax.STAXThread;
 
-public abstract class XfsExecuteCommandSingleParamAction extends XfsExecuteCommandAction{
+public abstract class XfsExecuteCommandSingleParamAction extends XfsExecuteCommandAction {
 
     private String param = "";
 
@@ -19,6 +19,10 @@ public abstract class XfsExecuteCommandSingleParamAction extends XfsExecuteComma
 
     @Override
     public String createRequest(STAXThread thread) throws STAXPythonEvaluationException {
-        return createCommand() + " " + getParameter();
+        String parameter = thread.pyStringEval(getParameter());
+        if (parameter.equalsIgnoreCase("none")) {
+            parameter = "";
+        }
+        return createCommand() + " " + parameter + handleEvents(thread);
     }
 }

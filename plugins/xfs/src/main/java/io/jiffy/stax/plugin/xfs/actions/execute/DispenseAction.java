@@ -10,6 +10,7 @@ public class DispenseAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         DispenseAction clone = new DispenseAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

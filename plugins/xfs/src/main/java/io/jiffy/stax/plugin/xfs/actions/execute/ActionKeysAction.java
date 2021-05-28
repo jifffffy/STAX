@@ -9,6 +9,7 @@ public class ActionKeysAction extends XfsExecuteCommandListParamAction {
     public STAXSTAFCommandAction createClone() {
         ActionKeysAction clone = new ActionKeysAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

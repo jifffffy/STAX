@@ -9,6 +9,7 @@ public class RawDataAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         RawDataAction clone = new RawDataAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

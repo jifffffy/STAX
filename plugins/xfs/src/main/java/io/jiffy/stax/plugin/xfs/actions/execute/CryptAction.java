@@ -8,6 +8,7 @@ public class CryptAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         CryptAction clone = new CryptAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

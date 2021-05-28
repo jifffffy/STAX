@@ -10,6 +10,7 @@ public class SetGuidLightAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         SetGuidLightAction clone = new SetGuidLightAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

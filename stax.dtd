@@ -1,3 +1,5 @@
+Response
+--------
 <!--
    STAf eXecution (STAX) Document Type Definition (DTD)
 
@@ -5,7 +7,7 @@
 
    STAX Extension Elements: []
 
-   Generated Date: 20210429-10:27:08
+   Generated Date: 20210528-11:49:11
 
    This DTD module is identified by the SYSTEM identifier:
 
@@ -73,16 +75,11 @@
 <!ATTLIST defaultcall
           function     IDREF    #REQUIRED
 >
-<!ELEMENT control-media     (#PCDATA)><!ELEMENT beep     EMPTY>
-
-<!ATTLIST beep
-
-        hz       CDATA   #IMPLIED
-
-        msecs       CDATA   #IMPLIED
-
-        vol       CDATA   #IMPLIED
-
+<!ELEMENT control-media     (#PCDATA)><!ELEMENT beep     EMPTY>
+<!ATTLIST beep
+        hz       CDATA   #IMPLIED
+        msecs       CDATA   #IMPLIED
+        vol       CDATA   #IMPLIED
         ><!ELEMENT card-unit-info     EMPTY><!ELEMENT fig     (%task;)>
 <!--================= The Release Element ========================== -->
 <!--
@@ -135,10 +132,8 @@
 <!ATTLIST signalhandler
           signal     CDATA        #REQUIRED
 >
-<!ELEMENT eject-slot-start     (type, cmdData)>
-
-<!ELEMENT type     (#PCDATA)>
-
+<!ELEMENT eject-slot-start     (type, cmdData)>
+<!ELEMENT type     (#PCDATA)>
 <!ELEMENT cmdData     (#PCDATA)><!ELEMENT epp     (%task;)><!ELEMENT retain-slot-end     (#PCDATA)><!ELEMENT cash-in-start     (#PCDATA)><!ELEMENT retain-card     (#PCDATA)>
 <!--================= The Script Element =========================== -->
 <!--
@@ -174,7 +169,10 @@
           block      CDATA    #IMPLIED
           if         CDATA    "1"
 >
-<!ELEMENT reset-count     EMPTY><!ELEMENT card-isr     (%task;)><!ELEMENT mdeia-list     EMPTY><!ELEMENT start-exchange     (#PCDATA)><!ELEMENT status     EMPTY><!ELEMENT read-form     (#PCDATA)>
+<!ELEMENT reset-count     EMPTY><!ELEMENT card-isr     (%task;)><!ELEMENT mdeia-list     EMPTY><!ELEMENT start-exchange     (#PCDATA)><!ELEMENT status     EMPTY><!ELEMENT read-form     (#PCDATA)>
+<!ATTLIST read-form
+                events       CDATA   #IMPLIED
+                >
 <!--================= The Log Element ============================== -->
 <!--
      Writes a message and its log level to a STAX Job User Log file.
@@ -272,13 +270,22 @@
 <!ATTLIST throw
           exception  CDATA        #REQUIRED
 >
-<!ELEMENT retract     (#PCDATA)><!ELEMENT cash-in-rollback     EMPTY><!ELEMENT end-exchange     (#PCDATA)>
+<!ELEMENT retract     (#PCDATA)>
+<!ATTLIST retract
+                events       CDATA   #IMPLIED
+                ><!ELEMENT cash-in-rollback     EMPTY><!ELEMENT end-exchange     (#PCDATA)>
 <!--================= The Return Element =========================== -->
 <!--
      Specifies a value to return from a function.
 -->
 <!ELEMENT return     (#PCDATA)>
-<!ELEMENT open     (#PCDATA)><!ELEMENT acc     (%task;)><!ELEMENT import-rsa-public-key     (#PCDATA)><!ELEMENT retain-slot-start     EMPTY><!ELEMENT action-keys     (#PCDATA)><!ELEMENT read-raw-data     (#PCDATA)>
+<!ELEMENT open     (#PCDATA)><!ELEMENT acc     (%task;)><!ELEMENT import-rsa-public-key     (#PCDATA)><!ELEMENT retain-slot-start     EMPTY><!ELEMENT action-keys     (#PCDATA)>
+<!ATTLIST action-keys
+                events       CDATA   #IMPLIED
+                ><!ELEMENT read-raw-data     (#PCDATA)>
+<!ATTLIST read-raw-data
+        events       CDATA   #IMPLIED
+        >
 <!--================= The Hold Element ============================= -->
 <!--
      The hold element specifies to hold a block in the job.
@@ -1220,56 +1227,31 @@
 <!ATTLIST other
           if        CDATA     "1"
 >
-<!ELEMENT capabilities     EMPTY><!--
-
-<ini load="file/path">
-
-  <query>
-
-    <section name="xxx">
-
-      <option name="yyy"></option>
-
-    </section>
-
-  </query>
-
-</ini>
-
--->
-
-<!ELEMENT ini     (query| update| remove)>
-
-        <!ATTLIST ini
-
-                path       CDATA   #IMPLIED
-
-                >
-
-        <!ELEMENT query     (section)>
-
-
-
-        <!ELEMENT update     (section)>
-
-        <!ELEMENT remove     (section)>
-
-
-
-        <!ELEMENT section     (option)>
-
-        <!ATTLIST section
-
-                name       CDATA   #IMPLIED
-
-                >
-
-        <!ELEMENT option     (#PCDATA)>
-
-        <!ATTLIST option
-
-                name       CDATA   #IMPLIED
-
+<!ELEMENT capabilities     EMPTY><!--
+<ini load="file/path">
+  <query>
+    <section name="xxx">
+      <option name="yyy"></option>
+    </section>
+  </query>
+</ini>
+-->
+<!ELEMENT ini     (query| update| remove)>
+        <!ATTLIST ini
+                path       CDATA   #IMPLIED
+                >
+        <!ELEMENT query     (section)>
+
+        <!ELEMENT update     (section)>
+        <!ELEMENT remove     (section)>
+
+        <!ELEMENT section     (option)>
+        <!ATTLIST section
+                name       CDATA   #IMPLIED
+                >
+        <!ELEMENT option     (#PCDATA)>
+        <!ATTLIST option
+                name       CDATA   #IMPLIED
                 ><!ELEMENT isr-idc     (%task;)>
 <!--================= The Message Element ========================== -->
 <!--

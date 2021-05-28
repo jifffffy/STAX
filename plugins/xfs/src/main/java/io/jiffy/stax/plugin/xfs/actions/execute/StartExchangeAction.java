@@ -10,13 +10,14 @@ public class StartExchangeAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         StartExchangeAction clone = new StartExchangeAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 
 
     @Override
     public String createCommand() {
-        return "startExchange";
+        return "startExchange startEx";
     }
 
 }

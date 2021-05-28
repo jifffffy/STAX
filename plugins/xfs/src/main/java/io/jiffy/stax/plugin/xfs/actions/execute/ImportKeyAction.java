@@ -10,6 +10,7 @@ public class ImportKeyAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         ImportKeyAction clone = new ImportKeyAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

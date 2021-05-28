@@ -10,13 +10,14 @@ public class EndExchangeAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         EndExchangeAction clone = new EndExchangeAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 
 
     @Override
     public String createCommand() {
-        return "endExchange";
+        return "endExchange cashUnitInfo";
     }
 
 }

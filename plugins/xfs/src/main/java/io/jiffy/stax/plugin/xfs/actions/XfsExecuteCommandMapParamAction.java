@@ -1,6 +1,5 @@
 package io.jiffy.stax.plugin.xfs.actions;
 
-import com.ibm.staf.STAFUtil;
 import com.ibm.staf.service.stax.STAXPythonEvaluationException;
 import com.ibm.staf.service.stax.STAXThread;
 
@@ -21,13 +20,13 @@ public abstract class XfsExecuteCommandMapParamAction extends XfsExecuteCommandA
      */
     @Override
     public String createRequest(STAXThread thread) throws STAXPythonEvaluationException {
-        String temp = getParameter();
-        if (temp == null) {
+        String pythonCode = getParameter();
+        if (pythonCode == null) {
             return createCommand();
         }
-        thread.pySetVar("xfsExecuteCommandParamMap", temp);
-        thread.pyExec("xfsExecuteCommandParamMapRequest = json.dumps(xfsExecuteCommandParamMap)");
-        return createCommand() + " " + STAFUtil.wrapData(normalizeRequest(thread.pyStringEval("xfsExecuteCommandParamMapRequest")));
+        // 构造python script
+        thread.pyExec("xfsExecuteCommandParamMapRequest = STAFUtil.wrapData(json.dumps(" + pythonCode + "))");
+        return createCommand() + " " + thread.pyStringEval("xfsExecuteCommandParamMapRequest") + handleEvents(thread);
     }
 
 

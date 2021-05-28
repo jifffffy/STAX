@@ -9,6 +9,7 @@ public class CashInStartAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         CashInStartAction clone = new CashInStartAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

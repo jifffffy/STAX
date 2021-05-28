@@ -8,6 +8,7 @@ public class ReadInputAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         ReadInputAction clone = new ReadInputAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

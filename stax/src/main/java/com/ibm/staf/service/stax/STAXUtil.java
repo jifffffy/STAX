@@ -49,8 +49,7 @@ public class STAXUtil {
         try {
             compileForPython(parsedCode);
         } catch (STAXPythonCompileException e) {
-            throw new STAXPythonCompileException(
-                    STAXUtil.formatErrorMessage(action) + "\n" + e.getMessage());
+            throw new STAXPythonCompileException(STAXUtil.formatErrorMessage(action) + "\n" + e.getMessage());
         }
 
         return parsedCode;

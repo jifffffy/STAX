@@ -8,6 +8,7 @@ public class ImportRSAPublicKeyAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         ImportRSAPublicKeyAction clone = new ImportRSAPublicKeyAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

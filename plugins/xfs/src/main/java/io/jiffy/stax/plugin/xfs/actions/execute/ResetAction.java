@@ -8,6 +8,7 @@ public class ResetAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         ResetAction clone = new ResetAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

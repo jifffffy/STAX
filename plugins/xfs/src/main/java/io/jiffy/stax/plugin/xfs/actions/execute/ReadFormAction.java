@@ -9,6 +9,7 @@ public class ReadFormAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         ReadFormAction clone = new ReadFormAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

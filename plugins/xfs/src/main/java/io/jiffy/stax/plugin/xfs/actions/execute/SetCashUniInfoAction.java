@@ -10,6 +10,7 @@ public class SetCashUniInfoAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         SetCashUniInfoAction clone = new SetCashUniInfoAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

@@ -8,6 +8,7 @@ public class ExportRSAIssuerSignedItemAction extends XfsExecuteCommandMapParamAc
     public STAXSTAFCommandAction createClone() {
         ExportRSAIssuerSignedItemAction clone = new ExportRSAIssuerSignedItemAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

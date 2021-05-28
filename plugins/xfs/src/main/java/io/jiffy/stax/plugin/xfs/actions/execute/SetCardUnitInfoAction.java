@@ -8,6 +8,7 @@ public class SetCardUnitInfoAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         SetCardUnitInfoAction clone = new SetCardUnitInfoAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

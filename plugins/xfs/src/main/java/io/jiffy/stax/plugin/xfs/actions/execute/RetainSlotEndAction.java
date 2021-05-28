@@ -10,6 +10,7 @@ public class RetainSlotEndAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         RetainSlotEndAction clone = new RetainSlotEndAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

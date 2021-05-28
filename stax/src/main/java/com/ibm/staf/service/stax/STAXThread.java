@@ -875,8 +875,7 @@ public class STAXThread implements STAXThreadCompleteListener {
 
     // Evaluate a value using Jython and return a String result.
 
-    public String pyStringEval(String value)
-            throws STAXPythonEvaluationException {
+    public String pyStringEval(String value) throws STAXPythonEvaluationException {
         try {
             return pyCompile(value).__unicode__().toString();
         } catch (PyException e) {
@@ -917,8 +916,7 @@ public class STAXThread implements STAXThreadCompleteListener {
     //   "machList", ['machA','machB'], ('machA','machB',machC'),
     //   machList[1:], machList[:-1], ['machA','machB'] + ['machC','machD']  
 
-    public List pyListEval(String value)
-            throws STAXPythonEvaluationException {
+    public List pyListEval(String value) throws STAXPythonEvaluationException {
         List<Object> jList = new ArrayList<Object>();
 
         synchronized (fPythonInterpreter) {
@@ -1000,27 +998,24 @@ public class STAXThread implements STAXThreadCompleteListener {
             // If a null string, an empty string, or "None" is passed in,
             // return an empty map.
 
-            if ((result != null) && !(result.toString().equals("None")) &&
-                    (result.toString() != "")) {
+            if ((result != null) && !(result.toString().equals("None")) && (result.toString() != "")) {
                 if (result instanceof PyDictionary) {
                     PyList pa = ((PyDictionary) result).items();
 
                     while (pa.__len__() != 0) {
                         PyTuple po = (PyTuple) pa.pop();
-                        Object first =
-                                po.__finditem__(0).__tojava__(Object.class);
+                        Object first = po.__finditem__(0).__tojava__(Object.class);
                         PyObject second = po.__finditem__(1);
                         jMap.put(first, second);
                     }
                 } else {
-                    throw new STAXPythonEvaluationException(
-                            "\nThe following string does not evaluate " +
-                                    "to a PyDictionary:\n" + value);
+                    throw new STAXPythonEvaluationException("\nThe following string does not evaluate to a PyDictionary:\n" + value);
                 }
             }
         } catch (PyException e) {
             throw new STAXPythonEvaluationException(
-                    "\nPython dictionary evaluation failed for:\n" + value +
+                    "\nPython dictionary evaluation failed for:\n"
+                            + value +
                             "\n" + e.toString());
         }
 

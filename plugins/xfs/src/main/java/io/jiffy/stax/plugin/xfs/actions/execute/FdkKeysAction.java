@@ -9,6 +9,7 @@ public class FdkKeysAction extends XfsExecuteCommandListParamAction {
     public STAXSTAFCommandAction createClone() {
         FdkKeysAction clone = new FdkKeysAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

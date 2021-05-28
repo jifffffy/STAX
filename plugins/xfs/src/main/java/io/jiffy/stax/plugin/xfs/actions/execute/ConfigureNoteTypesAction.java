@@ -9,11 +9,12 @@ public class ConfigureNoteTypesAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         ConfigureNoteTypesAction clone = new ConfigureNoteTypesAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 
     @Override
     public String createCommand() {
-        return "configureNoteTypes";
+        return "configureNoteTypes noteIds";
     }
 }

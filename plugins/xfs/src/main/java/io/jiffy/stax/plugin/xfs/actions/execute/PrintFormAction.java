@@ -10,6 +10,7 @@ public class PrintFormAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         PrintFormAction clone = new PrintFormAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

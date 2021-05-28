@@ -1,6 +1,5 @@
 package io.jiffy.stax.plugin.xfs.actions;
 
-import com.ibm.staf.STAFUtil;
 import com.ibm.staf.service.stax.STAXPythonEvaluationException;
 import com.ibm.staf.service.stax.STAXThread;
 
@@ -17,7 +16,7 @@ public abstract class XfsExecuteCommandListParamAction extends XfsExecuteCommand
                 .stream()
                 .map(param -> prefix() + " " + param + " " + suffix())
                 .collect(Collectors.joining(" "));
-        return createCommand() + " " + request;
+        return createCommand() + " " + request + handleEvents(thread);
     }
 
     protected   String prefix() { return ""; };

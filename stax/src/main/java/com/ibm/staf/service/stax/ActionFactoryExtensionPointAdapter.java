@@ -26,7 +26,7 @@ public abstract class ActionFactoryExtensionPointAdapter implements ActionFactor
 
     @Override
     public void loadResource(PluginWrapper pluginWrapper) throws IOException {
-        Logger.info("load {}.dtd", name);
+        // Logger.info("load {}.dtd", name);
         dtdInfo = IOUtils.toString(Objects.requireNonNull(pluginWrapper.getPluginClassLoader().getResourceAsStream(name + ".dtd")), StandardCharsets.UTF_8.name());
     }
 

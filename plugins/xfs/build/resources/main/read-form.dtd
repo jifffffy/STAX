@@ -1,1 +1,4 @@
 <!ELEMENT read-form     (#PCDATA)>
+<!ATTLIST read-form
+                events       CDATA   #IMPLIED
+                >

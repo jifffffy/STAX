@@ -8,11 +8,12 @@ public class CloseShutterAction extends XfsExecuteCommandSingleParamAction {
     public STAXSTAFCommandAction createClone() {
         CloseShutterAction clone = new CloseShutterAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 
     @Override
     public String createCommand() {
-        return "closeShutter";
+        return "closeShutter position";
     }
 }

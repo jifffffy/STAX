@@ -10,6 +10,7 @@ public class RetractAction extends XfsExecuteCommandMapParamAction {
     public STAXSTAFCommandAction createClone() {
         RetractAction clone = new RetractAction();
         clone.setParameter(getParameter());
+        clone.setEvents(getEvents());
         return clone;
     }
 

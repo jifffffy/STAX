@@ -26,7 +26,7 @@ public abstract class ActionFactorySupport<T extends STAXActionDefaultImpl> exte
         NodeList children = root.getChildNodes();
 
         // TODO text元素也是node, 所以tag下面有一个text就会有child,
-        //  这也是为什么<open>XXX</open>这类标记在handleChild中也会处理的原因, XXX将会在 Node.ELEMENT_NODE分支中处理
+        //  这也是为什么<open>XXX</open>这类标记在handleChildNode中也会处理的原因, XXX将会在 Node.ELEMENT_NODE分支中处理
 
         for (int i = 0; i < children.getLength(); ++i) {
             Node child = children.item(i);
