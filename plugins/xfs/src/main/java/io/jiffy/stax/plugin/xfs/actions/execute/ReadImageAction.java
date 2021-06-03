@@ -14,6 +14,6 @@ public class ReadImageAction extends XfsExecuteCommandMapParamAction {
 
     @Override
     public String createCommand() {
-        return "readImage";
+        return "readImage imageRequest";
     }
 }

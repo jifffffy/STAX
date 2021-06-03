@@ -202,6 +202,8 @@ io/jiffy/stax/plugin/xfs/factories/execute/EnableEventsActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.EnableEventsActionFactory
 io/jiffy/stax/plugin/xfs/factories/execute/OpenShutterActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.OpenShutterActionFactory
+io/jiffy/stax/plugin/xfs/actions/service/PprAction.java
+ io.jiffy.stax.plugin.xfs.actions.service.PprAction
 io/jiffy/stax/plugin/xfs/factories/execute/RetainSlotEndActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.RetainSlotEndActionFactory
 io/jiffy/stax/plugin/xfs/factories/execute/ActionkeysActionFactory.java
@@ -292,6 +294,8 @@ io/jiffy/stax/plugin/xfs/factories/info/NoteTypeListActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.info.NoteTypeListActionFactory
 io/jiffy/stax/plugin/xfs/factories/execute/CloseShutterActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.CloseShutterActionFactory
+io/jiffy/stax/plugin/xfs/factories/service/PprActionFactory.java
+ io.jiffy.stax.plugin.xfs.factories.service.PprActionFactory
 io/jiffy/stax/plugin/xfs/actions/service/HcrAction.java
  io.jiffy.stax.plugin.xfs.actions.service.HcrAction
 io/jiffy/stax/plugin/xfs/factories/service/RptActionFactory.java

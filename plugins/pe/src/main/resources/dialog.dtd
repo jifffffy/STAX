@@ -1,1 +1,3 @@
 <!ELEMENT dialog     (#PCDATA)>
+<!ATTLIST dialog
+                image     CDATA   #IMPLIED>

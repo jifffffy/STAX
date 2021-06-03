@@ -7,7 +7,7 @@ Response
 
    STAX Extension Elements: []
 
-   Generated Date: 20210528-16:02:51
+   Generated Date: 20210603-10:13:58
 
    This DTD module is identified by the SYSTEM identifier:
 
@@ -35,26 +35,27 @@ Response
                        iterate | print-form | break | 
                        read-input | rtn | testcase | 
                        breakpoint | call | write-raw-data | 
-                       throw | retract | cash-in-rollback | 
-                       end-exchange | return | open | 
-                       acc | import-rsa-public-key | retain-slot-start | 
-                       action-keys | read-raw-data | hold | 
-                       dis | loop | continue | 
-                       raise | dispense-card | mcr | 
-                       enable-events | cash-in-status | mcr-idc | 
-                       dispense | trd | jnl | 
-                       import-key | sequence | set-card-unit-info | 
-                       idr | currency-exp | try | 
-                       ukey-isr-crd | job | fdk-keys | 
-                       psb | retain-slot-start-ex | import | 
-                       crypt | nop | stafcmd | 
-                       timer | dialog | parallel | 
-                       hcr | paralleliterate | note-type-list | 
-                       read-image | on | rethrow | 
-                       process | capabilities | ini | 
-                       isr-idc | message | cash-in | 
-                       call-with-list | rpt | slots-info | 
-                       open-shutter | close-shutter | tcstatus'>
+                       ppr | throw | retract | 
+                       cash-in-rollback | end-exchange | return | 
+                       open | acc | import-rsa-public-key | 
+                       retain-slot-start | action-keys | read-raw-data | 
+                       hold | dis | loop | 
+                       continue | raise | dispense-card | 
+                       mcr | enable-events | cash-in-status | 
+                       mcr-idc | dispense | trd | 
+                       jnl | import-key | sequence | 
+                       set-card-unit-info | idr | currency-exp | 
+                       try | ukey-isr-crd | job | 
+                       fdk-keys | psb | retain-slot-start-ex | 
+                       import | crypt | nop | 
+                       stafcmd | timer | dialog | 
+                       parallel | hcr | paralleliterate | 
+                       note-type-list | read-image | on | 
+                       rethrow | process | capabilities | 
+                       ini | isr-idc | message | 
+                       cash-in | call-with-list | rpt | 
+                       slots-info | open-shutter | close-shutter | 
+                       tcstatus'>
 
 <!--================= STAX Job Definition ========================== -->
 <!--
@@ -262,7 +263,7 @@ Response
           function   CDATA    #REQUIRED
 >
 
-<!ELEMENT write-raw-data     (#PCDATA)>
+<!ELEMENT write-raw-data     (#PCDATA)><!ELEMENT ppr     (%task;)>
 <!--================= The Throw Element ============================ -->
 <!--
      The throw element specifies an exception to throw.
@@ -798,7 +799,9 @@ Response
 <!ATTLIST timer
           duration   CDATA        #REQUIRED
 >
-<!ELEMENT dialog     (#PCDATA)>
+<!ELEMENT dialog     (#PCDATA)>
+<!ATTLIST dialog
+                image     CDATA   #IMPLIED>
 <!--================= The Parallel Element ========================= -->
 <!--
      The parallel element performs one or more tasks in parallel.

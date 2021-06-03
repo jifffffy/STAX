@@ -3,6 +3,7 @@ package io.jiffy.stax.plugin.pe.action;
 import com.ibm.staf.service.stax.*;
 import io.jiffy.stax.plugin.pe.Constants;
 import io.jiffy.stax.plugin.pe.model.Dialog;
+import org.apache.commons.lang3.StringUtils;
 import org.pmw.tinylog.Logger;
 
 public class DialogAction extends STAXActionDefaultImpl {
@@ -10,6 +11,7 @@ public class DialogAction extends STAXActionDefaultImpl {
     public State state = State.INIT;
 
     private String description;
+    private String image;
 
     private final STAXHoldThreadCondition holdThreadCondition = new STAXHoldThreadCondition();
     private STAXThread ownThread;
@@ -40,8 +42,7 @@ public class DialogAction extends STAXActionDefaultImpl {
                     Logger.error(e);
                 }
 
-                new Dialog(label, desc,this)
-                        .setVisible(true);
+                new Dialog(label, desc,this, image).setVisible(true);
                 thread.addCondition(holdThreadCondition);
                 break;
             case YES:
@@ -65,6 +66,7 @@ public class DialogAction extends STAXActionDefaultImpl {
         clone.setXmlMachine(getXmlMachine());
 
         clone.setDescription(getDescription());
+        clone.setImage(getImage());
         return clone;
     }
 
@@ -74,5 +76,13 @@ public class DialogAction extends STAXActionDefaultImpl {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 }
