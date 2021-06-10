@@ -22,6 +22,8 @@ io/jiffy/stax/plugin/xfs/actions/execute/StartExchangeAction.java
  io.jiffy.stax.plugin.xfs.actions.execute.StartExchangeAction
 io/jiffy/stax/plugin/xfs/actions/service/JnlAction.java
  io.jiffy.stax.plugin.xfs.actions.service.JnlAction
+io/jiffy/stax/plugin/xfs/factories/service/CurrencyCimActionFactory.java
+ io.jiffy.stax.plugin.xfs.factories.service.CurrencyCimActionFactory
 io/jiffy/stax/plugin/xfs/actions/execute/ConfigureNoteTypesAction.java
  io.jiffy.stax.plugin.xfs.actions.execute.ConfigureNoteTypesAction
 io/jiffy/stax/plugin/xfs/factories/execute/CashInStartActionFactory.java
@@ -60,6 +62,8 @@ io/jiffy/stax/plugin/xfs/factories/service/JnlActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.service.JnlActionFactory
 io/jiffy/stax/plugin/xfs/actions/service/CcuAction.java
  io.jiffy.stax.plugin.xfs.actions.service.CcuAction
+io/jiffy/stax/plugin/xfs/actions/service/CurrencyCimAction.java
+ io.jiffy.stax.plugin.xfs.actions.service.CurrencyCimAction
 io/jiffy/stax/plugin/xfs/factories/execute/RawDataActionFactory.java
  io.jiffy.stax.plugin.xfs.factories.execute.RawDataActionFactory
 io/jiffy/stax/plugin/xfs/factories/execute/RetainSlotStartExActionFactory.java
