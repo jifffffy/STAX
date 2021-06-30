@@ -4,23 +4,36 @@ io/jiffy/stax/plugin/pe/action/DialogAction.java
  io.jiffy.stax.plugin.pe.action.DialogAction$State
 io/jiffy/stax/plugin/pe/Constants.java
  io.jiffy.stax.plugin.pe.Constants
+io/jiffy/stax/plugin/pe/utils/ByteUtilities.java
+ io.jiffy.stax.plugin.pe.utils.ByteUtilities
+ io.jiffy.stax.plugin.pe.utils.ByteUtilities$Endian
+io/jiffy/stax/plugin/pe/model/Dialog.java
+ io.jiffy.stax.plugin.pe.model.Dialog
+io/jiffy/stax/plugin/pe/factory/DelayActionFactory.java
+ io.jiffy.stax.plugin.pe.factory.DelayActionFactory
+io/jiffy/stax/plugin/pe/factory/DialogActionFactory.java
+ io.jiffy.stax.plugin.pe.factory.DialogActionFactory
+io/jiffy/stax/plugin/pe/factory/ComActionFactory.java
+ io.jiffy.stax.plugin.pe.factory.ComActionFactory
+io/jiffy/stax/plugin/pe/action/DelayAction.java
+ io.jiffy.stax.plugin.pe.action.DelayAction
 io/jiffy/stax/plugin/pe/factory/IniActionFactory.java
  io.jiffy.stax.plugin.pe.factory.IniActionFactory
 io/jiffy/stax/plugin/pe/action/IniAction.java
  io.jiffy.stax.plugin.pe.action.IniAction
  io.jiffy.stax.plugin.pe.action.IniAction$1
  io.jiffy.stax.plugin.pe.action.IniAction$State
-io/jiffy/stax/plugin/pe/model/Dialog.java
- io.jiffy.stax.plugin.pe.model.Dialog
-io/jiffy/stax/plugin/pe/factory/DelayActionFactory.java
- io.jiffy.stax.plugin.pe.factory.DelayActionFactory
 io/jiffy/stax/plugin/pe/action/BeepAction.java
  io.jiffy.stax.plugin.pe.action.BeepAction
-io/jiffy/stax/plugin/pe/factory/DialogActionFactory.java
- io.jiffy.stax.plugin.pe.factory.DialogActionFactory
+io/jiffy/stax/plugin/pe/action/ComAction.java
+ io.jiffy.stax.plugin.pe.action.ComAction
+ io.jiffy.stax.plugin.pe.action.ComAction$1
+ io.jiffy.stax.plugin.pe.action.ComAction$2
+ io.jiffy.stax.plugin.pe.action.ComAction$3
+ io.jiffy.stax.plugin.pe.action.ComAction$State
 io/jiffy/stax/plugin/pe/PePlugin.java
  io.jiffy.stax.plugin.pe.PePlugin
-io/jiffy/stax/plugin/pe/action/DelayAction.java
- io.jiffy.stax.plugin.pe.action.DelayAction
+io/jiffy/stax/plugin/pe/utils/ByteArrayBuilder.java
+ io.jiffy.stax.plugin.pe.utils.ByteArrayBuilder
 io/jiffy/stax/plugin/pe/factory/BeepActionFactory.java
  io.jiffy.stax.plugin.pe.factory.BeepActionFactory

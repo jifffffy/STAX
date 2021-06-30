@@ -7,7 +7,7 @@ Response
 
    STAX Extension Elements: []
 
-   Generated Date: 20210610-09:05:06
+   Generated Date: 20210630-10:13:12
 
    This DTD module is identified by the SYSTEM identifier:
 
@@ -37,25 +37,25 @@ Response
                        breakpoint | call | write-raw-data | 
                        ppr | throw | retract | 
                        cash-in-rollback | end-exchange | return | 
-                       open | acc | import-rsa-public-key | 
-                       retain-slot-start | action-keys | read-raw-data | 
-                       hold | dis | loop | 
-                       continue | raise | dispense-card | 
-                       mcr | enable-events | cash-in-status | 
-                       mcr-idc | dispense | trd | 
-                       jnl | import-key | sequence | 
-                       set-card-unit-info | idr | currency-exp | 
-                       try | ukey-isr-crd | job | 
-                       fdk-keys | psb | retain-slot-start-ex | 
-                       import | crypt | nop | 
-                       stafcmd | timer | dialog | 
-                       currency-cim | parallel | hcr | 
-                       paralleliterate | note-type-list | read-image | 
-                       on | rethrow | process | 
-                       capabilities | ini | isr-idc | 
-                       message | cash-in | call-with-list | 
-                       rpt | slots-info | open-shutter | 
-                       close-shutter | tcstatus'>
+                       open | acc | com | 
+                       import-rsa-public-key | retain-slot-start | action-keys | 
+                       read-raw-data | hold | dis | 
+                       loop | continue | raise | 
+                       dispense-card | mcr | enable-events | 
+                       cash-in-status | mcr-idc | dispense | 
+                       trd | jnl | import-key | 
+                       sequence | set-card-unit-info | idr | 
+                       currency-exp | try | ukey-isr-crd | 
+                       job | fdk-keys | psb | 
+                       retain-slot-start-ex | import | crypt | 
+                       nop | stafcmd | timer | 
+                       dialog | currency-cim | parallel | 
+                       hcr | paralleliterate | note-type-list | 
+                       read-image | on | rethrow | 
+                       process | capabilities | ini | 
+                       isr-idc | message | cash-in | 
+                       call-with-list | rpt | slots-info | 
+                       open-shutter | close-shutter | tcstatus'>
 
 <!--================= STAX Job Definition ========================== -->
 <!--
@@ -283,7 +283,12 @@ Response
      Specifies a value to return from a function.
 -->
 <!ELEMENT return     (#PCDATA)>
-<!ELEMENT open     (#PCDATA)><!ELEMENT acc     (%task;)><!ELEMENT import-rsa-public-key     (#PCDATA)><!ELEMENT retain-slot-start     EMPTY><!ELEMENT action-keys     (#PCDATA)>
+<!ELEMENT open     (#PCDATA)><!ELEMENT acc     (%task;)><!ELEMENT com     (#PCDATA)>
+<!ATTLIST com
+        port       CDATA   #IMPLIED
+        readTimeout       CDATA   #IMPLIED
+        writeTimeout       CDATA   #IMPLIED
+        ><!ELEMENT import-rsa-public-key     (#PCDATA)><!ELEMENT retain-slot-start     EMPTY><!ELEMENT action-keys     (#PCDATA)>
 <!ATTLIST action-keys
                 events       CDATA   #IMPLIED
                 ><!ELEMENT read-raw-data     (#PCDATA)>

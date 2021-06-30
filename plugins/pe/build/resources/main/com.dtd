@@ -1,0 +1,6 @@
+<!ELEMENT com     (#PCDATA)>
+<!ATTLIST com
+        port       CDATA   #IMPLIED
+        readTimeout       CDATA   #IMPLIED
+        writeTimeout       CDATA   #IMPLIED
+        >
